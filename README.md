@@ -5,6 +5,10 @@ This contains the work we do to answer to the questions for the exam
 
 Folders inside this project:
 
+questions:
+-these are the questions for the exam
+-exam.descr.md
+
 
 scripts
 
