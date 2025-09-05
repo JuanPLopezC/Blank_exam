@@ -1,6 +1,7 @@
 # Blank_exam
 Exam for RMED 2025 - Group Blank
 
+
 This contains the work we do to answer to the questions for the exam
 
 Folders inside this project:
