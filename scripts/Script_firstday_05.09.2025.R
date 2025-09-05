@@ -18,7 +18,9 @@ exam_data %>%
 
 #It contains 672 rows and 21 columns.
 #Data seems to be repeated. It says that we have 316 unique subjects and some missing, 40.
-#There is one variable starting with numbers: 1_Age
+#There is one variable starting with numbers: 1_Age. With spaces: T stage, volume measurement. With other things: .value
+
+
 
 
 
