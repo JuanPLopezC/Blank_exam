@@ -122,3 +122,12 @@ tidy_exam_data <- read_delim("data/tidy_exam_data_2025-09-08.txt",
 
 glimpse (tidy_exam_data)
 
+
+#2 rows per ID because the variable Volumevolume measurement ( nå navn prostate_colum), PVol (prostate volumne) and TVol (tumor volume). 
+
+data_wide <- tidy_exam_data %>%
+  pivot_wider(
+    names_from = Prostate_volume,
+    values_from = Value_volume_measurement
+  )
+
