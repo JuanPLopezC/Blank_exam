@@ -1,7 +1,8 @@
 
-#SCRIPT FOR BLANK EXAM - 05-09-2025#
+#SCRIPT FOR BLANK EXAM#
 
-#Opening tidyverse and here package ----
+#TASK 1 - 05.09.2025#----
+##Opening tidyverse and here package ----
 library(dplyr)
 library (usethis)
 library(here)
@@ -11,7 +12,7 @@ library(skimr)
 use_git_config(fetch.prune = "true")
 here("data", "exam_data.txt")
 
-#Exploring the data ----
+##Exploring the data ----
 skimr::skim(exam_data)
 summary(exam_data)
 summary(data)
@@ -54,7 +55,7 @@ exam_data %>%
 #exploring the data
 
 
-##To be able to find duplicates ----
+###To be able to find duplicates ----
 data %>% count(subject)
 any(duplicated(data))
 any(duplicated(data$subject))
@@ -70,11 +71,11 @@ data_clean <-exam_data %>%
            sep = "-")
 data_clean
 
-#Change ID from chr to numeric
+##Change ID from chr to numeric
 data_clean$ID <- as.numeric(as.character(data_clean$ID))
 str(data_clean)
 
-#Renaming the variables according to the suggestions above ----
+##Renaming the variables according to the suggestions above ----
 
 data_clean <- data_clean %>%
   rename("Storage_age_group" = "RBC.Age.Group" ) %>%
@@ -96,7 +97,7 @@ data_clean <- data_clean %>%
 
 glimpse(data_clean)
 
-#Removing duplicates. Checking afterwars that the clean_data has 40 less rows.---- 
+##Removing duplicates. Checking afterwars that the clean_data has 40 less rows.---- 
 data_clean<- data_clean %>%
   distinct()
 nrow(data_clean)
@@ -104,7 +105,7 @@ nrow(exam_data)
 
 
 
-#Make the tidy version of the database based on the changes we did in each branch and save it with today's date----
+##Make the tidy version of the database based on the changes we did in each branch and save it with today's date----
 
 fileName <- paste0("data/tidy_exam_data_", Sys.Date(), ".txt")
 write_delim(
@@ -113,7 +114,7 @@ write_delim(
   delim = "\t"
 )
 
-#Reading the tidy version----
+##Reading the tidy version----
 
 tidy_exam_data <- read_delim("data/tidy_exam_data_2025-09-08.txt", 
                                         delim = "\t", escape_double = FALSE, 
@@ -121,4 +122,9 @@ tidy_exam_data <- read_delim("data/tidy_exam_data_2025-09-08.txt",
 
 
 glimpse (tidy_exam_data)
+
+
+#TASK 2 #----
+
+
 
