@@ -63,15 +63,20 @@ sum(duplicated(data$subject))
 names(data)
 
 
-#separate collum subject til Hosp og ID
-data <-data %>% 
+#Separate collum subject til Hosp og ID
+data_clean <-exam_data %>% 
   separate(col =subject, 
            into = c("Hosp", "ID"), 
            sep = "-")
+data_clean
 
-##Renaming the variables according to the suggestions above ----
+#Change ID from chr to numeric
+data_clean$ID <- as.numeric(as.character(data_clean$ID))
+str(data_clean)
 
-exam_data %>%
+#Renaming the variables according to the suggestions above ----
+
+data_clean <- data_clean %>%
   rename("Storage_age_group" = "RBC.Age.Group" ) %>%
   rename("Median_storage_age_group" = "Median.RBC.Age" ) %>%
   rename("Age" ="1_Age") %>%
@@ -85,14 +90,34 @@ exam_data %>%
   rename("Preoperative_therapy" = "PreopTherapy") %>%
   rename("Allogeneic_units" = "Units") %>%
   rename("Adjuvant_therapy" = "AnyAdjTherapy") %>%
+  rename("Adjuvant_radiation_therapy" = "AdjRadTherapy") %>%
   rename("Prostate_volume" = "volume measurement") %>%
   rename("Value_volume_measurement" = ".value")
 
-##Removing duplicates. Checking afterwars that the clean_data has 40 less rows.---- 
-data_clean<- data %>%
+glimpse(data_clean)
+
+#Removing duplicates. Checking afterwars that the clean_data has 40 less rows.---- 
+data_clean<- data_clean %>%
   distinct()
 nrow(data_clean)
-nrow(data)
+nrow(exam_data)
 
 
 
+#Make the tidy version of the database based on the changes we did in each branch and save it with today's date----
+
+fileName <- paste0("data/tidy_exam_data_", Sys.Date(), ".txt")
+write_delim(
+  data_clean, 
+  file = fileName,
+  delim = "\t"
+)
+
+#Reading the tidy version----
+
+tidy_exam_data <- read_delim("data/tidy_exam_data_2025-09-08.txt", 
+                                        delim = "\t", escape_double = FALSE, 
+                                        trim_ws = TRUE)
+
+
+glimpse (tidy_exam_data)
