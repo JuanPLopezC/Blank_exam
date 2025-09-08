@@ -131,3 +131,9 @@ data_wide <- tidy_exam_data %>%
     values_from = Value_volume_measurement
   )
 
+# A numeric column showing multiplication of `AnyAdjTherapy_ (Adjuvant_radiation_therapy) and `PreopTherapy`(Preoperative_therapi) for each person
+#assignment making a new variable Totaltherapy- in the real world the assignment doesn't make sense, since no one recived adjuvant therapy- so the value vil be 0 for everyone. 
+glimpse(data_wide)
+
+data_wide <- data_wide %>%
+  mutate(TotalTherapy = Adjuvant_radiation_therapy * Preoperative_therapy)
