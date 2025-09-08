@@ -16,6 +16,7 @@ exam_data %>%
   distinct(subject)
 
 
+###From the exploration:----
 #It contains 672 rows and 21 columns.
 #Data seems to be repeated. It says that we have 316 unique subjects and some missing, 40.
 #There is one variable starting with numbers: 1_Age. With spaces: T stage, volume measurement. With other things: .value
@@ -43,4 +44,25 @@ exam_data %>%
 ##TimeToRecurrence_unit : same
 ##volume measurement: Prostate_volume
 ##.value: Value_volume_measurement
+
+
+##Renaming the variables according to the suggestions above ----
+
+exam_data %>%
+  rename("Storage_age_group" = "RBC.Age.Group" ) %>%
+  rename("Median_storage_age_group" = "Median.RBC.Age" ) %>%
+  rename("Age" ="1_Age") %>%
+  rename("African_american" ="AA") %>%
+  rename( "Family_history" = "FamHx") %>%
+  rename("Tumor_stage" ="T stage") %>%
+  rename("Biopsy_gleason_score" = "bGS") %>%
+  rename("Bladder_neck_positive" = "BN+") %>%
+  rename("Extra_diagnoses" = "OrganConfined") %>%
+  rename("Preoperative_PSA" = "PreopPSA") %>%
+  rename("Preoperative_therapy" = "PreopTherapy") %>%
+  rename("Allogeneic_units" = "Units") %>%
+  rename("Adjuvant_therapy" = "AnyAdjTherapy") %>%
+  rename("Prostate_volume" = "volume measurement") %>%
+  rename("Value_volume_measurement" = ".value")
+
 
