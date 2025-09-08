@@ -93,6 +93,3 @@ data_clean<- data %>%
   distinct()
 nrow(data_clean)
 nrow(data)
-
-
-
