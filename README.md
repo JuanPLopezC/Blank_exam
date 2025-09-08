@@ -21,5 +21,14 @@ We probably need to.
 data:
 -this one has the 3 datafiles that we were given
 --codebook_exam_data.html
+<<<<<<< HEAD
 --exam_datapt_join.txt
 --exam_data.txt
+=======
+--exam_data_join.txt
+--exam_data.txt
+
+08.09.25 (Anders og Guri)
+- Seperated column subject to hosp and ID(Guri)
+- Removed 40 duplicates in the dataset --> from 672 to 632
+- Commuted into main script 
