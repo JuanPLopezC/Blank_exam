@@ -133,3 +133,14 @@ tidy_exam_data <- tidy_exam_data %>%
   select(-African_american, -Biopsy_gleason_score, -Bladder_neck_positive, -Extra_diagnoses)
 
 glimpse (tidy_exam_data)
+
+
+## Create a new column----
+#A column showing `recurrence` as Yes/No
+
+tidy_exam_data <- tidy_exam_data %>%
+  mutate(Recurrence2 = if_else(Recurrence== "0", "No", "Yes")) %>% count(Recurrence)
+
+tidy_exam_data  %>% count(Recurrence) #to compare it to the original one to see if this was correctly done
+
+glimpse (tidy_exam_data)
