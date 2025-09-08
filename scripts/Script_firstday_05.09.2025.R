@@ -126,5 +126,10 @@ glimpse (tidy_exam_data)
 
 #TASK 2 #----
 
+##Delete variables using select variables----
+#AA, bGS, BNplus, OrganConfined
 
+tidy_exam_data <- tidy_exam_data %>%
+  select(-African_american, -Biopsy_gleason_score, -Bladder_neck_positive, -Extra_diagnoses)
 
+glimpse (tidy_exam_data)
