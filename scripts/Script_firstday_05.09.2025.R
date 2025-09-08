@@ -11,6 +11,8 @@ library(skimr)
 use_git_config(fetch.prune = "true")
 here("data", "exam_data.txt")
 
+exam_data <- read.delim(here("data", "exam_data.txt"))
+
 #Exploring the data ----
 skimr::skim(exam_data)
 summary(exam_data)
@@ -121,4 +123,31 @@ tidy_exam_data <- read_delim("data/tidy_exam_data_2025-09-08.txt",
 
 
 glimpse (tidy_exam_data)
+
+
+#Here i start with "Task2" - Anders 
+##Task:A column showing whether `PVol` is higher than 100 or not: values High/Low
+tidy_exam_data <- tidy_exam_data %>%
+  mutate(
+    PVol_HighLow = case_when(
+      volume.measurement == "PVol" & .value > 100 ~ "High",
+      volume.measurement == "PVol" ~ "Low",
+      TRUE ~ ""
+    )
+  )
+str(tidy_exam_data)
+
+###This is to round to the nearest round number in the table 
+tidy_exam_data <- tidy_exam_data %>%
+mutate(TimeToRecurrence_days = round(TimeToRecurrence_days))
+
+###this is just to rearange the order of the columns
+tidy_exam_data <- tidy_exam_data %>%
+  relocate(TimeToRecurrence_days, .after = TimeToRecurrence_unit)
+
+## Task: A numeric column showing `TimeToReccurence` in days (or weeks if you like)
+tidy_exam_data <- tidy_exam_data %>%
+  mutate(TimeToRecurrence_days = TimeToRecurrence * 7)
+glimpse(tidy_exam_data)
+
 
