@@ -18,3 +18,8 @@ data:
 --codebook_exam_data.html
 --exam_data_join.txt
 --exam_data.txt
+
+08.09.25 (Anders og Guri)
+- Seperated column subjectto hosp and ID 
+- Removed 40 duplicates in the dataset --> from 672 to 632
+- Commuted into main script
