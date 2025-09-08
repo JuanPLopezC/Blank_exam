@@ -20,6 +20,6 @@ data:
 --exam_data.txt
 
 08.09.25 (Anders og Guri)
-- Seperated column subjectto hosp and ID 
+- Seperated column subject to hosp and ID(Guri)
 - Removed 40 duplicates in the dataset --> from 672 to 632
 - Commuted into main script
