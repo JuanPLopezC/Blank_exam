@@ -12,13 +12,11 @@ library(skimr)
 use_git_config(fetch.prune = "true")
 here("data", "exam_data.txt")
 
-<<<<<<< HEAD
+
 exam_data <- read.delim(here("data", "exam_data.txt"))
 
 #Exploring the data ----
-=======
-##Exploring the data ----
->>>>>>> 58d4540bde1e0b5e6861f337ed2c8eff2f5ec566
+
 skimr::skim(exam_data)
 summary(exam_data)
 summary(data)
