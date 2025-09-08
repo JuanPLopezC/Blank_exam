@@ -22,4 +22,4 @@ data:
 08.09.25 (Anders og Guri)
 - Seperated column subject to hosp and ID(Guri)
 - Removed 40 duplicates in the dataset --> from 672 to 632
-- Commuted into main script
+- Commuted into main script 
