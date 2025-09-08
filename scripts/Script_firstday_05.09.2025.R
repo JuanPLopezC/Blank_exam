@@ -127,7 +127,9 @@ tidy_exam_data <- read_delim("data/tidy_exam_data_2025-09-08.txt",
 glimpse (tidy_exam_data)
 
 
+
 #TASK 2 #----
+
 
 ##Delete variables using select variables----
 #AA, bGS, BNplus, OrganConfined
@@ -172,3 +174,20 @@ tidy_exam_data <- tidy_exam_data %>%
 tidy_exam_data  %>% count(Recurrence) #to compare it to the original one to see if this was correctly done
 
 glimpse (tidy_exam_data)
+#2 rows per ID because the variable Volumevolume measurement ( nå navn prostate_colum), PVol (prostate volumne) and TVol (tumor volume). 
+
+
+# A numeric column showing multiplication of `AnyAdjTherapy_ (Adjuvant_radiation_therapy) and `PreopTherapy`(Preoperative_therapi) for each person
+#assignment making a new variable Totaltherapy- in the real world the assignment doesn't make sense, since no one recived adjuvant therapy- so the value vil be 0 for everyone. 
+glimpse(tidy_exam_data)
+
+tidy_exam_data <- tidy_exam_data %>%
+  mutate(TotalTherapy = Adjuvant_radiation_therapy * Preoperative_therapy)
+
+#
+data_wide <- tidy_exam_data %>%
+  pivot_wider(
+    names_from = Prostate_volume,
+    values_from = Value_volume_measurement
+  )
+
