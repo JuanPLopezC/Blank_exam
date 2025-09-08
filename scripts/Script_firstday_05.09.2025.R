@@ -40,3 +40,4 @@ nrow(data_clean)
 nrow(data)
 
 
+
