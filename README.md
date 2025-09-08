@@ -28,7 +28,15 @@ data:
 --exam_data_join.txt
 --exam_data.txt
 
-08.09.25 (Anders og Guri)
-- Seperated column subject to hosp and ID(Guri)
+Data cleaning 08.09.25
+- Separeted column subject to hosp and ID
 - Removed 40 duplicates in the dataset --> from 672 to 632
-- Commuted into main script 
+- Renamed column names 
+- Committed and pushed into main script 
+- Deleted our own branches
+
+
+Tidying the data 08.09.25 
+- Transformed "ID" column from categorical to numerical 
+- Creating a "data_clean"" vector containing all of our changes 
+- Making a new file with the tidied data named: Tidy_exam_data.txt
