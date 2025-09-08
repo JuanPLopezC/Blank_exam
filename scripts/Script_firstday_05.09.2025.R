@@ -1,7 +1,8 @@
 
-#SCRIPT FOR BLANK EXAM - 05-09-2025#
+#SCRIPT FOR BLANK EXAM#
 
-#Opening tidyverse and here package ----
+#TASK 1 - 05.09.2025#----
+##Opening tidyverse and here package ----
 library(dplyr)
 library (usethis)
 library(here)
@@ -11,9 +12,13 @@ library(skimr)
 use_git_config(fetch.prune = "true")
 here("data", "exam_data.txt")
 
+<<<<<<< HEAD
 exam_data <- read.delim(here("data", "exam_data.txt"))
 
 #Exploring the data ----
+=======
+##Exploring the data ----
+>>>>>>> 58d4540bde1e0b5e6861f337ed2c8eff2f5ec566
 skimr::skim(exam_data)
 summary(exam_data)
 summary(data)
@@ -56,7 +61,7 @@ exam_data %>%
 #exploring the data
 
 
-##To be able to find duplicates ----
+###To be able to find duplicates ----
 data %>% count(subject)
 any(duplicated(data))
 any(duplicated(data$subject))
@@ -72,11 +77,11 @@ data_clean <-exam_data %>%
            sep = "-")
 data_clean
 
-#Change ID from chr to numeric
+##Change ID from chr to numeric
 data_clean$ID <- as.numeric(as.character(data_clean$ID))
 str(data_clean)
 
-#Renaming the variables according to the suggestions above ----
+##Renaming the variables according to the suggestions above ----
 
 data_clean <- data_clean %>%
   rename("Storage_age_group" = "RBC.Age.Group" ) %>%
@@ -98,7 +103,7 @@ data_clean <- data_clean %>%
 
 glimpse(data_clean)
 
-#Removing duplicates. Checking afterwars that the clean_data has 40 less rows.---- 
+##Removing duplicates. Checking afterwars that the clean_data has 40 less rows.---- 
 data_clean<- data_clean %>%
   distinct()
 nrow(data_clean)
@@ -106,7 +111,7 @@ nrow(exam_data)
 
 
 
-#Make the tidy version of the database based on the changes we did in each branch and save it with today's date----
+##Make the tidy version of the database based on the changes we did in each branch and save it with today's date----
 
 fileName <- paste0("data/tidy_exam_data_", Sys.Date(), ".txt")
 write_delim(
@@ -115,12 +120,23 @@ write_delim(
   delim = "\t"
 )
 
-#Reading the tidy version----
+##Reading the tidy version----
 
 tidy_exam_data <- read_delim("data/tidy_exam_data_2025-09-08.txt", 
                                         delim = "\t", escape_double = FALSE, 
                                         trim_ws = TRUE)
 
+
+glimpse (tidy_exam_data)
+
+
+#TASK 2 #----
+
+##Delete variables using select variables----
+#AA, bGS, BNplus, OrganConfined
+
+tidy_exam_data <- tidy_exam_data %>%
+  select(-African_american, -Biopsy_gleason_score, -Bladder_neck_positive, -Extra_diagnoses)
 
 glimpse (tidy_exam_data)
 
@@ -139,7 +155,7 @@ str(tidy_exam_data)
 
 ###This is to round to the nearest round number in the table 
 tidy_exam_data <- tidy_exam_data %>%
-mutate(TimeToRecurrence_days = round(TimeToRecurrence_days))
+  mutate(TimeToRecurrence_days = round(TimeToRecurrence_days))
 
 ###this is just to rearange the order of the columns
 tidy_exam_data <- tidy_exam_data %>%
@@ -150,4 +166,12 @@ tidy_exam_data <- tidy_exam_data %>%
   mutate(TimeToRecurrence_days = TimeToRecurrence * 7)
 glimpse(tidy_exam_data)
 
+## Create a new column----
+#A column showing `recurrence` as Yes/No
 
+tidy_exam_data <- tidy_exam_data %>%
+  mutate(Recurrence2 = if_else(Recurrence== "0", "No", "Yes")) %>% count(Recurrence)
+
+tidy_exam_data  %>% count(Recurrence) #to compare it to the original one to see if this was correctly done
+
+glimpse (tidy_exam_data)
