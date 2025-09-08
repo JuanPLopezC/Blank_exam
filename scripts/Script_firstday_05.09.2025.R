@@ -15,7 +15,8 @@ here("data", "exam_data.txt")
 
 exam_data <- read.delim(here("data", "exam_data.txt"))
 
-#Exploring the data ----
+
+##Exploring the data ----
 
 skimr::skim(exam_data)
 summary(exam_data)
