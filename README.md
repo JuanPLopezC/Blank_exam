@@ -36,12 +36,24 @@ Data cleaning 08.09.25
 - Deleted our own branches
 
 
-Tidying the data 08.09.25 
+Tidying the data 
+#08.09.25 
 - Transformed "ID" column from categorical to numerical 
 - Creating a "data_clean"" vector containing all of our changes 
 - Making a new file with the tidied data named: Tidy_exam_data.txt
+#09.09.25
+- tidying the data trough splitting column: "volume.measurement" splitting columms PVol and making a new "Pvol high/low column"
+- Conducting the following task: Set the order of columns:id, hospital, age and other columns
+- And this task: Arrange ID column of your dataset in order of increasing number or alphabetically.
 
-Task 2 (Anders) 08.09.25
- - Created a column showing whether Pvol was higher than 100 or not: values High/Low - High is defined as a value over 100 
- - Created a column showing the "time to recccurance" in days
- - Tidying this two new columns trough removing decimals and rearanging order
+
+Task 3 (Anders)
+#08.09.25
+  - Created a column showing whether Pvol was higher than 100 or not: values High/Low - High is defined as a value over 100 
+  - Created a column showing the "time to recccurance" in days
+  - Tidying this two new columns trough removing decimals and rearanging order
+¤09.09.25
+   -Performing 
+ 
+
+ 
