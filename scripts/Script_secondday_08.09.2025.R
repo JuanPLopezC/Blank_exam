@@ -81,13 +81,9 @@ glimpse(tidy_exam_data)
 
 #Set the order of columns:  `id, hospital, Age` and other columns
 tidy_exam_data <- tidy_exam_data %>%
-  select(ID, Hosp, Age, everything())
-
-glimpse(tidy_exam_data)
-
-#Arrange ID column of your dataset in order of increasing number or alphabetically.
-tidy_exam_data <- tidy_exam_data %>%
+  select(ID, Hosp, Age, everything()) %>%
   arrange(ID)
+
 
 fileName <- paste0("data/tidy_exam_data_", Sys.Date(), ".txt")
 write_delim(
@@ -95,4 +91,6 @@ write_delim(
   file = fileName,
   delim = "\t"
 )
+
+
 
