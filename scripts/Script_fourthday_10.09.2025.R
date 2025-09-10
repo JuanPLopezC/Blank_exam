@@ -2,6 +2,10 @@
 
 #We had to do more tidy on the data because we found there were some wrong variables, we started using the joint_exam_data from 09.09.2025
 
+#tidying collum Hosp- deleting charakters and keeping the number. 
+tidy_exam_data <-tidy_exam_data %>%
+  mutate(Hosp = gsub("Hosp", "", Hosp))%>%
+  rename("Hospital" = "Hosp")
 
 #Here i try fix the timetoreccurance error - Anders  
 #This is to make the correct columns in days and weeks and round the values so that it doesn't include decimals
@@ -48,5 +52,10 @@ tidy_exam_data %>%
 #Stratify your data by a categorical column and report min, max, mean and sd of a numeric column for a defined set of observations - use a pipe `%>%`!    
 #- Only for persons with `T.Stage == 1`
 #- Only for persons with `Median.RBC.Age == 25`
+
+tidy_exam_data %>% 
+  group_by(Recurrence2) %>% 
+  filter(Tumor_stage==1) %>%
+  summarise(max(nConsultations, na.rm = T), min(nConsultations, na.rm = T))
 
 
