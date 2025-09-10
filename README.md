@@ -45,6 +45,11 @@ Tidying the data
 - tidying the data trough splitting column: "volume.measurement" splitting columms PVol and making a new "Pvol high/low column"
 - Conducting the following task: Set the order of columns:id, hospital, age and other columns
 - And this task: Arrange ID column of your dataset in order of increasing number or alphabetically.
+- Merging the exam_data_join to the tidy_exam_data
+#10.09.25
+- Making new timetoreccurance columns - fixing errors from previous days
+- Renaming hosp columns
+- dividing exercises from task 3 among the group
 
 
 Task 3 (Anders)
@@ -54,8 +59,11 @@ Task 3 (Anders)
   - Tidying this two new columns trough removing decimals and rearanging order
 #10.09.25
 - fixing error on time to reccurance_days column - making new ones with correct values
-- conducting the task: "explore and comment on the missing variables"
-Comment on the missing variables in the dataset: missing data - nine variables contained missing values (N/A): Tumorstage (13/316), PVol (9/316), Pvol_HighLow (9/316), TVol (6/316), Preoperative_PSA (3/316), TimeToReccurance(1/316) TimeToReccurance_days_new (1/316),TimeToReccurance_weeks_new (1/316), ttr_num (1/316)
+- conducting the exercise: "explore and comment on the missing variables"
+  Answer --> Comment on the missing variables in the dataset: missing data - nine variables contained missing values (N/A): Tumorstage (13/316), PVol (9/316), Pvol_HighLow (9/316), TVol (6/316), Preoperative_PSA (3/316), TimeToReccurance(1/316) TimeToReccurance_days_new (1/316),TimeToReccurance_weeks_new (1/316), ttr_num (1/316)
+- conducting the exercise: Stratify your data by a categorical column and report min, max, mean and sd of a numeric column.
+- conducting the exercise: Use two categorical columns in your dataset to create a table (either with
+  `table()`, `count()`, or `janitor::tabyl()`)
  
 
  
