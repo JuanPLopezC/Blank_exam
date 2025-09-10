@@ -1,6 +1,6 @@
-#starting fresh with a new name of datafile and new script for task 4, concerning ggplot. 
-ggplot_exam_data <- read_tsv("data/ggplot_exam_data_2025-09-10.txt")
+#Script 10.09.2025#
 
+##Reading the ggplot version from 10.09.2025----
 #library(readr)  
 #library(dplyr)   
 #library(GGally)
@@ -8,6 +8,10 @@ ggplot_exam_data <- read_tsv("data/ggplot_exam_data_2025-09-10.txt")
 #library(ggcorrplot)
 #install.packages("ggplot2")
 #install.packages("ggcorrplot")
+
+#starting fresh with a new name of datafile and new script for task 4, concerning ggplot. 
+ggplot_exam_data <- read_tsv("data/ggplot_exam_data_2025-09-10.txt")
+
 
 #Exercise: Are there any correlated measurements? Yes, see plot below - Anders
 ggplot_data <- read_tsv("data/ggplot_exam_data_2025-09-10.txt")
@@ -164,18 +168,33 @@ kruskal.test(TimeToRecurrence_weeks_new ~ factor(Tumor_stage), data = ggplot_exa
 # Answer: yes, there's a clear correlation between time to recurrense and tumor_stage, makes sense, 
 
 
+# Task: Where there more `T.Stage == 2` in the group with `PreopTherapy == 1` than in the group `PreopTherapy == 0`?
+
+
+plot_task <-ggplot_exam_data %>%
+  mutate(Preoperative_therapy2 = if_else(Preoperative_therapy== "0", "No", "Yes")) %>%
+  filter(Tumor_stage==2) %>%
+  ggplot(aes(Preoperative_therapy2)) +
+  geom_bar(width = 0.3)
+plot_task
+
+plot_task_2 <- plot_task +
+  xlab("Preoperative therapy") +
+  ylab("Number of patients") +
+  labs(title = "Number of patients with tumor stage 2",
+       subtitle = "stratified by preoperative therapy groups")
+
+plot_task_2
+
+plot_task_2 + 
+  theme(
+    plot.title = element_text(
+      size = 20, 
+      face = "bold"
+    )
+  )
 
 
 
-#library(here)
-#library(tidyverse)
-#library(patchwork)
 
 
-##Reading the ggplot version from 10.09.2025----
-
-ggplot_exam_data <- read_delim("data/ggplot_exam_data_2025-09-10.txt", 
-                             delim = "\t", escape_double = FALSE, 
-                             trim_ws = TRUE)
-
-ggplot_exam_data
