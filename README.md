@@ -38,32 +38,30 @@ Data cleaning 08.09.25
 
 Tidying the data 
 #08.09.25 
-- Transformed "ID" column from categorical to numerical 
-- Creating a "data_clean"" vector containing all of our changes 
-- Making a new file with the tidied data named: Tidy_exam_data.txt
+  - Transformed "ID" column from categorical to numerical 
+  - Creating a "data_clean"" vector containing all of our changes 
+  - Making a new file with the tidied data named: Tidy_exam_data.txt
 #09.09.25
-- tidying the data trough splitting column: "volume.measurement" splitting columms PVol and making a new "Pvol high/low column"
-- Conducting the following task: Set the order of columns:id, hospital, age and other columns
-- And this task: Arrange ID column of your dataset in order of increasing number or alphabetically.
-- Merging the exam_data_join to the tidy_exam_data
+  - tidying the data trough splitting column: "volume.measurement" splitting columms PVol and making a new "Pvol high/low column"
+  - Conducting the following task: Set the order of columns:id, hospital, age and other columns
+  - And this task: Arrange ID column of your dataset in order of increasing number or alphabetically.
 #10.09.25
-- Making new timetoreccurance columns - fixing errors from previous days
-- Renaming hosp columns
-- dividing exercises from task 3 among the group
+  - Making a new datafile ready for ggplot: ggplot_exam_data_2025-09-10.txt
+  - Dividing exercises from task 4 among the group
+  - Conducting the exercises from task 4
+  - Starting with task 5
 
 
 Task 3 (Anders)
 #08.09.25
-  - Created a column showing whether Pvol was higher than 100 or not: values High/Low - High is defined as a value over 100 
+  - Created a column showing whether Pvol was hi gher than 100 or not: values High/Low - High is defined as a value over 100 
   - Created a column showing the "time to recccurance" in days
   - Tidying this two new columns trough removing decimals and rearanging order
 #10.09.25
-- fixing error on time to reccurance_days column - making new ones with correct values
-- conducting the exercise: "explore and comment on the missing variables"
-  Answer --> Comment on the missing variables in the dataset: missing data - nine variables contained missing values (N/A): Tumorstage (13/316), PVol (9/316), Pvol_HighLow (9/316), TVol (6/316), Preoperative_PSA (3/316), TimeToReccurance(1/316) TimeToReccurance_days_new (1/316),TimeToReccurance_weeks_new (1/316), ttr_num (1/316)
-- conducting the exercise: Stratify your data by a categorical column and report min, max, mean and sd of a numeric column.
-- conducting the exercise: Use two categorical columns in your dataset to create a table (either with
-  `table()`, `count()`, or `janitor::tabyl()`)
+  - fixing error on time to reccurance_days column - making new ones with correct values
+  - conducting the task: "explore and comment on the missing variables"
+  Comment on the missing variables in the dataset: missing data - nine variables contained missing values (N/A): Tumorstage (13/316), PVol (9/316), Pvol_HighLow (9/316), TVol (6/316), Preoperative_PSA (3/316), TimeToReccurance(1/316) TimeToReccurance_days_new (1/316),TimeToReccurance_weeks_new (1/316), ttr_num (1/316)
+
  
 
  
