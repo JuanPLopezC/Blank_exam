@@ -34,11 +34,31 @@ tidy_exam_data <- tidy_exam_data %>%
 #Doing some of the exercises about stratifying#
 #Stratify your data by a categorical column and report min, max, mean and sd of a numeric column for a defined set of observations - use a pipe `%>%`!    
 #- Only for persons with `T.Stage == 1`
-#- Only for persons with `Median.RBC.Age == 25`
 
 tidy_exam_data %>% 
   group_by(Recurrence2) %>% 
   filter(Tumor_stage==1) %>%
   summarise(max(nConsultations, na.rm = T), min(nConsultations, na.rm = T))
 
+
+tidy_exam_data %>% 
+  group_by(Recurrence2) %>% 
+  filter(Tumor_stage==1) %>%
+  summarise(
+    min_pvol = min(PVol, na.rm = TRUE),
+    max_pvol = max(PVol, na.rm = TRUE),
+    mean_pvol = mean(PVol, na.rm = TRUE),
+    sd_pvol = sd(PVol, na.rm = TRUE)
+)
+
+# Only for persons with `Median.RBC.Age == 25`
+tidy_exam_data %>% 
+  group_by(Recurrence2) %>% 
+  filter(Median_storage_age_group==25) %>%
+  summarise(
+    min_pvol = min(PVol, na.rm = TRUE),
+    max_pvol = max(PVol, na.rm = TRUE),
+    mean_pvol = mean(PVol, na.rm = TRUE),
+    sd_pvol = sd(PVol, na.rm = TRUE)
+  )
 
