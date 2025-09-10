@@ -79,3 +79,26 @@ tidy_exam_data %>%
     sd_pvol = sd(PVol, na.rm = TRUE)
   )
 
+
+#Only for persons with `TimeToReccurence` later than 4 weeks
+joint_exam_data %>% 
+  group_by(Recurrence2) %>% 
+  filter(TimeToRecurrence_weeks_new>4) %>%
+  summarise(
+    min_pvol = min(PVol, na.rm = TRUE),
+    max_pvol = max(PVol, na.rm = TRUE),
+    mean_pvol = mean(PVol, na.rm = TRUE),
+    sd_pvol = sd(PVol, na.rm = TRUE)
+  )
+
+
+# Only for persons recruited in `Hospital==1` and `TVol == 2`
+joint_exam_data %>% 
+  group_by(Recurrence2) %>% 
+  filter(Hospital == 1, TVol== 2) %>%
+  summarise(
+    min_pvol = min(PVol, na.rm = TRUE),
+    max_pvol = max(PVol, na.rm = TRUE),
+    mean_pvol = mean(PVol, na.rm = TRUE),
+    sd_pvol = sd(PVol, na.rm = TRUE)
+  )
