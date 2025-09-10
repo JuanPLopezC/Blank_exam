@@ -25,7 +25,7 @@ tidy_exam_data <- readr::read_tsv("data/joint_exam_data_2025-09-09.txt") %>%
 tidy_exam_data <- tidy_exam_data %>%
   select(-any_of(c("TimeToRecurrence_days", "timetoreccurance_days")))
 
-#Here i try to conduct the task: Stratify your data by a categorical column and report min, max, mean and sd of a numeric column. - Anders 
+#Task: Stratify your data by a categorical column and report min, max, mean and sd of a numeric column. - Anders 
 library(dplyr)
 library(tidyr)
 
