@@ -1,6 +1,6 @@
 #Script fourth day 10.09.2025#
 
-
+#library(tidyverse)
 
 #Here i try fix the timetoreccurance error - Anders  
 #This is to make the correct columns in days and weeks and round the values so that it doesn't include decimals
@@ -30,6 +30,8 @@ joint_exam_data <- joint_exam_data %>%
 joint_exam_data <-joint_exam_data %>%
   mutate(Hosp = gsub("Hosp", "", Hosp))%>%
   rename("Hospital" = "Hosp")
+
+glimpse(joint_exam_data)
 
 #Task: Stratify your data by a categorical column and report min, max, mean and sd of a numeric column. - Anders 
 #library(dplyr)
@@ -101,13 +103,23 @@ joint_exam_data %>%
   )
 
 #Exercise: Use two categorical columns in your dataset to create a table (either with table(), count(), or janitor::tabyl()) - Anders 
-#library(dplyr), #library(tidyr), #library(forcats)
+#library(dplyr), #library(tidyr), 
+library(forcats)
 tab <- joint_exam_data %>%
   mutate(
     Tumor_stage = fct_explicit_na(as.factor(Tumor_stage), na_level = "Missing"),
-    Hosp        = as.factor(Hosp)
+    Hospital        = as.factor(Hospital)
   ) %>%
-  count(Tumor_stage, Hosp, name = "n", .drop = FALSE) %>%
-  pivot_wider(names_from = Hosp, values_from = n, values_fill = 0)
+  count(Tumor_stage, Hospital, name = "n", .drop = FALSE) %>%
+  pivot_wider(names_from = Hospital, values_from = n, values_fill = 0)
 
 tab
+
+#Save new data file ready for ggplot
+fileName <- paste0("data/ggplot_exam_data_", Sys.Date(), ".txt")
+write_delim(
+  joint_exam_data, 
+  file = fileName,
+  delim = "\t"
+)
+
