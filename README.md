@@ -52,8 +52,10 @@ Task 3 (Anders)
   - Created a column showing whether Pvol was higher than 100 or not: values High/Low - High is defined as a value over 100 
   - Created a column showing the "time to recccurance" in days
   - Tidying this two new columns trough removing decimals and rearanging order
-¤09.09.25
-   -Performing 
+#10.09.25
+- fixing error on time to reccurance_days column - making new ones with correct values
+- conducting the task: "explore and comment on the missing variables"
+Comment on the missing variables in the dataset: missing data - nine variables contained missing values (N/A): Tumorstage (13/316), PVol (9/316), Pvol_HighLow (9/316), TVol (6/316), Preoperative_PSA (3/316), TimeToReccurance(1/316) TimeToReccurance_days_new (1/316),TimeToReccurance_weeks_new (1/316), ttr_num (1/316)
  
 
  
