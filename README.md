@@ -21,12 +21,10 @@ We probably need to.
 data:
 -this one has the 3 datafiles that we were given
 --codebook_exam_data.html
-<<<<<<< HEAD
 --exam_datapt_join.txt
 --exam_data.txt
-=======
---exam_data_join.txt
---exam_data.txt
+
+
 
 Data cleaning 08.09.25
 - Separeted column subject to hosp and ID
