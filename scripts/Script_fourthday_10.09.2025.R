@@ -25,6 +25,23 @@ tidy_exam_data <- readr::read_tsv("data/joint_exam_data_2025-09-09.txt") %>%
 tidy_exam_data <- tidy_exam_data %>%
   select(-any_of(c("TimeToRecurrence_days", "timetoreccurance_days")))
 
+#Here i try to conduct the task: Stratify your data by a categorical column and report min, max, mean and sd of a numeric column. - Anders 
+library(dplyr)
+library(tidyr)
+
+tidy_exam_data %>%
+  group_by(
+    Tumor_stage_lab = if_else(is.na(Tumor_stage), "Missing", as.character(Tumor_stage))
+  ) %>%
+  summarise(
+    n    = n(),
+    min  = min(Preoperative_PSA, na.rm = TRUE),
+    max  = max(Preoperative_PSA, na.rm = TRUE),
+    mean = mean(Preoperative_PSA, na.rm = TRUE),
+    sd   = sd(Preoperative_PSA, na.rm = TRUE),
+    .groups = "drop"
+  )
+
 
 
 #Doing some of the exercises about stratifying#
