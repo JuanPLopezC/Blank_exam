@@ -1,15 +1,10 @@
 #Script fourth day 10.09.2025#
 
-#We had to do more tidy on the data because we found there were some wrong variables, we started using the joint_exam_data from 09.09.2025
 
-#tidying collum Hosp- deleting charakters and keeping the number. 
-tidy_exam_data <-tidy_exam_data %>%
-  mutate(Hosp = gsub("Hosp", "", Hosp))%>%
-  rename("Hospital" = "Hosp")
 
 #Here i try fix the timetoreccurance error - Anders  
 #This is to make the correct columns in days and weeks and round the values so that it doesn't include decimals
-tidy_exam_data <- readr::read_tsv("data/joint_exam_data_2025-09-09.txt") %>%
+joint_exam_data <- readr::read_tsv("data/joint_exam_data_2025-09-09.txt") %>%
   mutate(
     unit_norm = str_to_lower(str_trim(TimeToRecurrence_unit)), 
     ttr_num   = readr::parse_number(as.character(TimeToRecurrence)),
@@ -26,14 +21,21 @@ tidy_exam_data <- readr::read_tsv("data/joint_exam_data_2025-09-09.txt") %>%
   )
 
 #This is to delete the old column - timetoreccurance_days
-tidy_exam_data <- tidy_exam_data %>%
+joint_exam_data <- joint_exam_data %>%
   select(-any_of(c("TimeToRecurrence_days", "timetoreccurance_days")))
 
-#Task: Stratify your data by a categorical column and report min, max, mean and sd of a numeric column. - Anders 
-library(dplyr)
-library(tidyr)
+#We had to do more tidy on the data because we found there were some wrong variables, we started using the joint_exam_data from 09.09.2025
 
-tidy_exam_data %>%
+#tidying collum Hosp- deleting charakters and keeping the number. 
+joint_exam_data <-joint_exam_data %>%
+  mutate(Hosp = gsub("Hosp", "", Hosp))%>%
+  rename("Hospital" = "Hosp")
+
+#Task: Stratify your data by a categorical column and report min, max, mean and sd of a numeric column. - Anders 
+#library(dplyr)
+#library(tidyr)
+
+joint_exam_data %>%
   group_by(
     Tumor_stage_lab = if_else(is.na(Tumor_stage), "Missing", as.character(Tumor_stage))
   ) %>%
@@ -52,13 +54,8 @@ tidy_exam_data %>%
 #Stratify your data by a categorical column and report min, max, mean and sd of a numeric column for a defined set of observations - use a pipe `%>%`!    
 #- Only for persons with `T.Stage == 1`
 
-tidy_exam_data %>% 
-  group_by(Recurrence2) %>% 
-  filter(Tumor_stage==1) %>%
-  summarise(max(nConsultations, na.rm = T), min(nConsultations, na.rm = T))
 
-
-tidy_exam_data %>% 
+joint_exam_data %>% 
   group_by(Recurrence2) %>% 
   filter(Tumor_stage==1) %>%
   summarise(
@@ -69,7 +66,7 @@ tidy_exam_data %>%
 )
 
 # Only for persons with `Median.RBC.Age == 25`
-tidy_exam_data %>% 
+joint_exam_data %>% 
   group_by(Recurrence2) %>% 
   filter(Median_storage_age_group==25) %>%
   summarise(
@@ -102,3 +99,15 @@ joint_exam_data %>%
     mean_pvol = mean(PVol, na.rm = TRUE),
     sd_pvol = sd(PVol, na.rm = TRUE)
   )
+
+#Exercise: Use two categorical columns in your dataset to create a table (either with table(), count(), or janitor::tabyl()) - Anders 
+#library(dplyr), #library(tidyr), #library(forcats)
+tab <- joint_exam_data %>%
+  mutate(
+    Tumor_stage = fct_explicit_na(as.factor(Tumor_stage), na_level = "Missing"),
+    Hosp        = as.factor(Hosp)
+  ) %>%
+  count(Tumor_stage, Hosp, name = "n", .drop = FALSE) %>%
+  pivot_wider(names_from = Hosp, values_from = n, values_fill = 0)
+
+tab
