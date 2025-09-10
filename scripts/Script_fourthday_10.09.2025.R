@@ -76,3 +76,14 @@ joint_exam_data %>%
     sd_pvol = sd(PVol, na.rm = TRUE)
   )
 
+#Exercise: Use two categorical columns in your dataset to create a table (either with table(), count(), or janitor::tabyl()) - Anders 
+#library(dplyr), #library(tidyr), #library(forcats)
+tab <- joint_exam_data %>%
+  mutate(
+    Tumor_stage = fct_explicit_na(as.factor(Tumor_stage), na_level = "Missing"),
+    Hosp        = as.factor(Hosp)
+  ) %>%
+  count(Tumor_stage, Hosp, name = "n", .drop = FALSE) %>%
+  pivot_wider(names_from = Hosp, values_from = n, values_fill = 0)
+
+tab
