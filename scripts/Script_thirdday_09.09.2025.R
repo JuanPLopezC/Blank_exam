@@ -22,7 +22,7 @@ joint_exam_data <- tidy_exam_data %>%
 
 glimpse(joint_exam_data)
 
-#to save it as a new database
+#to save it as a new database that will contain the joint data
 fileName <- paste0("data/joint_exam_data_", Sys.Date(), ".txt")
 write_delim(
   joint_exam_data, 
