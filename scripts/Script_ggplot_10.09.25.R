@@ -1,4 +1,5 @@
 
+
 #starting fresh with a new name of datafile and new script for task 4, concerning ggplot. 
 ggplot_exam_data <- read_tsv("data/ggplot_exam_data_2025-09-10.txt")
 
@@ -63,3 +64,6 @@ ggplot_exam_data %>%
 #task 5
 #cheatdata("blood_storage", package = "medicaldata")
 #blood_data <- blood_storage
+
+
+
