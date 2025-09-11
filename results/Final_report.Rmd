@@ -5,7 +5,7 @@ date: "2025-09-11"
 output: html_document
 ---
 
-INTRODUCTION
+##INTRODUCTION
 
 Source: This data set is mainly from Cata et al. ’Blood Storage Duration and Biochemical Recurrence of Cancer after Radical Prostate- ctomy’. Mayo Clin Proc 2011; 86(2): 120-127. A clean version is taken from R package medicaldata.
 
@@ -15,7 +15,7 @@ From the description on package website: “This data set contains data on 316 m
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-#Tidying the data
+##Tidying the data
 The datasett contained oirginally 672 rows for 316 IDs and 21 variables. 
 
 First we deleted 40 duplicates. Through the pivot wider task ( volumemasurement and .value-> PVol and TVol). rows were halved, now presenting one row per ID for the 316 study subjects. 
@@ -67,7 +67,7 @@ _(each member of the group chooses one column)_
 ```
 
 
-### Including Plots
+## Including Plots
 
 
 - Are there any correlated measurements? (hint: `GGally::ggcorr` or search
@@ -88,7 +88,7 @@ plot1
 ```
 
 
-#### Analyse the dataset and answer the following questions:    
+## Analyse the dataset and answer the following questions:    
 _(each person chooses one question)_
 
   - Was the time to recurrence different for various `RBC.Age.Group` levels?
