@@ -8,8 +8,8 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+#
 
-#Task 1
 
 ```{r cars}
 library(here)
@@ -26,12 +26,15 @@ source(here("scripts", "Script_ggplot_10.09.25.R"))
 plot1
 ```
 
+
 ```{r}
 
 ```
 
+
 ```{r include=FALSE}
 
 ```
+
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
