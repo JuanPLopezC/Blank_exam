@@ -42,3 +42,9 @@ model2 <- data %>%
   lm(TVol ~ Recurrence, data = .) %>%
   broom::tidy()
 model2
+
+library(dplyr)
+
+#Renaming sGS column
+ggplot_exam_data <- ggplot_exam_data |> rename(Surgical_gleason_score = sGS)
+
