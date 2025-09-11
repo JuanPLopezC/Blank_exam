@@ -1,0 +1,32 @@
+#Columns renamed:
+  - Subject --> ble splittet til hosiptal og ID 
+  - 1_Age --> Age
+  - RBC.age.group --> Storage_age_group
+  - Median.RBC.Age --> Median_storage_age_group 
+  - FamHx --> Family_history
+  - T stage --> Tumor_stage 
+  - PreopPSA --> 	Preoperative_PSA
+  - PreopTherapy --> Preoperative_therapy
+  - Units --> Allogeneic_units
+  - AnyAjdTherapy --> Adjuvant_therapy
+  - AdjRadTherapy --> Adjuvant_radiation_therapy
+  - SGS --> Surgical_gleason_score 
+ 
+ #Columns deleted
+  - AA
+  
+ #New columns
+| Variable                    Position    Description                                                                                                 Codes                 |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+| PVol                          17        Indicator showing PVol measures; type: numeric                                                              Range:  19-274       
+| TVol                          18        Indicator showing TVol measures; type: categorical                                                          Levels: 1, 2, 3
+| PVol_HighLow                  19        Indicator swhowing PVol measures over/under 100; type: categorical                                          Levels: "High", "Low"
+| Reccurance2                   20        Indicator showing recurrence; type: categorical                                                             Levels: "Yes", "No"
+| TotalTherapy                  21        Indicator showing if received Preoperative_therapy or adujuvation_radiatio_therapy; type: categorical       Levels: 0, 1
+| unit_norm                     23        Indicator used to make PVol_high/low variable; type: categorical                                            Levels: "High", "Low"                                           
+| ttr_num	                      24        Indicator also used to make PVol_highlow variable; type: numeric                                            Levels: "10-25"
+| TimeToRecurrence_days_new     25        Indicator showing days for reccurance; type: numeric                                                        Range:  2-725
+| TimeToRecurrence_weeks_new    26        Indicator showing weeks for reccurance; type: numeric                                                       Range:  0-104
+
+ 
+  

@@ -53,6 +53,7 @@ Tidying the data
 #11.09.25 
   - Continuing and finishing work on task 5 among the group
   - Creating a new script for this task
+  - Created a new file called:Codebook_updated_2025_11_09.txt
 
 
 Task 3 (Anders)
