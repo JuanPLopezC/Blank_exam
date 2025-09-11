@@ -36,7 +36,7 @@ labs <- make.unique(abbreviate(colnames(cm_ok), minlength = 12))
 colnames(cm_ok) <- rownames(cm_ok) <- labs
 
 ##making the heatmap
-ggcorrplot(
+plot_1 <- ggcorrplot(
   cm_ok,
   type = "lower",
   lab = FALSE,           
@@ -48,6 +48,8 @@ ggcorrplot(
     axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size = 8),
     axis.text.y = element_text(size = 8)
   )
+
+plot_1
 
 #Exercise: Is there a relation between the `PVol` and `TVol` variables? Yes, there is a weak negative association between PVol and TVol (Spearman ρ = −0.21, p < 0.001). Anders 
 ggplot_exam_data <- ggplot_data %>%                   
@@ -66,7 +68,7 @@ dat <- read_tsv("data/ggplot_exam_data_2025-09-10.txt") %>%
   mutate(TVol = factor(TVol))
 
 #boxplot and jitter
-p <- ggplot(dat, aes(TVol, PVol)) +
+plot_2 <- ggplot(dat, aes(TVol, PVol)) +
   geom_boxplot(outlier.shape = NA) +
   geom_jitter(width = 0.15, alpha = 0.5, size = 1) +
   scale_y_log10() +
@@ -75,18 +77,20 @@ p <- ggplot(dat, aes(TVol, PVol)) +
        y = "PVol (log10 scale)") +
   theme_minimal()
 
-p
+plot_2
 
 #Adding Spearman correlation to the boxplot
 sp <- cor.test(dat$PVol, as.numeric(dat$TVol), method = "spearman")
-p + annotate("text",
+plot_2 + annotate("text",
              x = Inf, y = Inf,
              label = sprintf("Spearman rho = %.2f, p = %.3g",
                              sp$estimate, sp$p.value),
              hjust = 1.05, vjust = 1.5, size = 4)
 
+plot_2
+
 #Exercise: Does the distribution of `Preoperativte_PSA` differ by `Tumor_stage`? yes, see plot. 
-ggplot(ggplot_exam_data, aes(x = factor(Tumor_stage), y = Preoperative_PSA)) +
+plot_3 <- ggplot(ggplot_exam_data, aes(x = factor(Tumor_stage), y = Preoperative_PSA)) +
   geom_boxplot(fill = "lightblue", color = "darkblue") +
   labs(
     title = "Distribusjon av Preoperative PSA etter Tumor stage",
@@ -97,9 +101,10 @@ ggplot(ggplot_exam_data, aes(x = factor(Tumor_stage), y = Preoperative_PSA)) +
 summary(ggplot_exam_data$Preoperative_PSA)
 summary(ggplot_exam_data$Tumor_stage)
 
+plot_3
 
 #exercise: Does the distribution of `PVol` differ by `sGS`? Yes, see plot. 
-ggplot(ggplot_exam_data, aes(x = factor(sGS), y = PVol)) +
+plot_4 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = PVol)) +
   geom_boxplot(fill = "lightblue", color = "darkblue") +
   labs(
     title = "Distribusjon av Protate Volum etter surgical Gleason score",
@@ -108,11 +113,14 @@ ggplot(ggplot_exam_data, aes(x = factor(sGS), y = PVol)) +
   ) +
   theme_minimal()
 
+plot_4
+
+
 summary(ggplot_exam_data$PVol)
 summary(ggplot_exam_data$sGS)
 
 #Does the distribution of `TVol` differ by `sGS`? Yes.See plot.  
-  ggplot(ggplot_exam_data, aes(x = factor(sGS), y = TVol)) +
+plot_5 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = TVol)) +
   geom_boxplot(fill = "lightblue", color = "darkblue") +
   labs(
     title = "Distribusjon av Tumor Volum etter surgical Gleason score",
@@ -124,11 +132,13 @@ summary(ggplot_exam_data$sGS)
 summary(ggplot_exam_data$TVol)
 summary(ggplot_exam_data$sGS)
 
+plot_5
+
 #Does the distribution of `TVol` differ by `sGS`?  
 # both TVOl and sGs are categorical, not continues variables,therefor choosing grouped bar plot for this task. 
 #there are quite a few NA for postopr gleasonscore ( is it like this in real life?), so I choose to keep the values. 
 
-ggplot_exam_data %>%
+plot_6 <- ggplot_exam_data %>%
   ggplot(aes(x = factor(TVol), fill = factor(sGS))) +
   geom_bar(position = "dodge") +
   labs(
@@ -139,62 +149,36 @@ ggplot_exam_data %>%
   ) +
   theme_minimal()
 
-
-
-
-#Task 5
-#cheatsheet("blood_storage", package = "medicaldata")
-#blood_data <- blood_storage
-
-
-#Was the time to recurrence different for various `RBC.Age.Group` levels?
-#Expecting that the variable time to recurrence is not normaly distributed, and run theese to commands to check.  
-shapiro.test(ggplot_exam_data$TimeToRecurrence_weeks_new)
-hist(ggplot_exam_data$TimeToRecurrence_weeks_new)
-
-#therefor choosing Kruskal wallies test
-kruskal.test(TimeToRecurrence_weeks_new ~ factor(Storage_age_group), data = ggplot_exam_data)
-#
-#data:  TimeToRecurrence_weeks_new by factor(Storage_age_group)
-#Kruskal-Wallis chi-squared = 1.0218, df = 2, p-value = 0.6
-# NO, P-value > 0,05
-
-
-
-#Was the time to recurrence different for various `T.Stage` levels?
-kruskal.test(TimeToRecurrence_weeks_new ~ factor(Tumor_stage), data = ggplot_exam_data)
-#Kruskal-Wallis rank sum test data:  TimeToRecurrence_weeks_new by factor(Tumor_stage)
-#Kruskal-Wallis chi-squared = 7.9623, df = 1, p-value = 0.004776
-# Answer: yes, there's a clear correlation between time to recurrense and tumor_stage, makes sense, 
-
+plot_6
 
 # Task: Where there more `T.Stage == 2` in the group with `PreopTherapy == 1` than in the group `PreopTherapy == 0`?
 
 
-plot_task <-ggplot_exam_data %>%
+plot_7_1 <-ggplot_exam_data %>%
   mutate(Preoperative_therapy2 = if_else(Preoperative_therapy== "0", "No", "Yes")) %>%
   filter(Tumor_stage==2) %>%
   ggplot(aes(Preoperative_therapy2)) +
-  geom_bar(width = 0.3)
-plot_task
+  geom_bar(width = 0.3, fill = "darkblue")
+plot_7_1
 
-plot_task_2 <- plot_task +
+plot_7_2 <- plot_7_1 +
   xlab("Preoperative therapy") +
   ylab("Number of patients") +
   labs(title = "Number of patients with tumor stage 2",
        subtitle = "stratified by preoperative therapy groups")
 
-plot_task_2
+plot_7_2
 
-plot_task_2 + 
+plot_7 <- plot_7_2 + 
   theme(
     plot.title = element_text(
       size = 20, 
       face = "bold"
     )
-  )
+  ) +
+  theme_minimal()
 
-
+plot_7
 
 
 
