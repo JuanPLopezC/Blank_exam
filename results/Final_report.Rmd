@@ -5,11 +5,17 @@ date: "2025-09-11"
 output: html_document
 ---
 
+INTRODUCTION
+
+Source: This data set is mainly from Cata et al. ’Blood Storage Duration and Biochemical Recurrence of Cancer after Radical Prostate- ctomy’. Mayo Clin Proc 2011; 86(2): 120-127. A clean version is taken from R package medicaldata.
+
+From the description on package website: “This data set contains data on 316 men who had undergone radical prostatectomy and received transfusion during or within 30 days of the surgical procedure and had available prostate serum antigen (PSA) follow-up data. The main exposure of interest was RBC storage duration group.”
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-#
 
+# 
 
 ```{r cars}
 library(here)
@@ -26,15 +32,12 @@ source(here("scripts", "Script_ggplot_10.09.25.R"))
 plot1
 ```
 
-
 ```{r}
 
 ```
 
-
 ```{r include=FALSE}
 
 ```
-
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
