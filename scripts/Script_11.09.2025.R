@@ -25,3 +25,20 @@ kruskal.test(TimeToRecurrence_weeks_new ~ factor(Tumor_stage), data = ggplot_exa
 #Kruskal-Wallis rank sum test data:  TimeToRecurrence_weeks_new by factor(Tumor_stage)
 #Kruskal-Wallis chi-squared = 7.9623, df = 1, p-value = 0.004776
 # Answer: yes, there's a clear correlation between time to recurrense and tumor_stage, makes sense, 
+
+#Anders - Did having Adjuvant_radiation_therapy affected time to recurrence?
+
+data <- read_tsv("data/ggplot_exam_data_2025-09-10.txt")
+
+model1 <- data %>%
+  lm(TimeToRecurrence_days_new ~ Adjuvant_radiation_therapy, data = .) %>%
+  broom::tidy()
+model1
+
+
+#JP - Did those that had recurrence had also larger `TVol` values than those without recurrence?
+
+model2 <- data %>%
+  lm(TVol ~ Recurrence, data = .) %>%
+  broom::tidy()
+model2
