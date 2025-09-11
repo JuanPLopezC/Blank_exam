@@ -16,8 +16,8 @@
   - AA
   
  #New columns
-| Variable                    Position    Description                                                                                                 Codes |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+| Variable                    Position    Description                                                                                                 Codes                 |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
 | PVol                          17        Indicator showing PVol measures; type: numeric                                                              Range:  19-274       
 | TVol                          18        Indicator showing TVol measures; type: categorical                                                          Levels: 1, 2, 3
 | PVol_HighLow                  19        Indicator swhowing PVol measures over/under 100; type: categorical                                          Levels: "High", "Low"
