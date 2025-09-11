@@ -1,4 +1,4 @@
-# Script TASK 1 - 05.09.2025# ----
+# Script TASK 1 - 2025-09-05# ----
 ## Opening tidyverse and here package ----
 library(dplyr)
 library(usethis)
