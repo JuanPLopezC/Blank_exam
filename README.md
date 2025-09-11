@@ -50,6 +50,9 @@ Tidying the data
   - Dividing exercises from task 4 among the group
   - Conducting the exercises from task 4
   - Starting with task 5
+#11.09.25 
+  - Continuing and finishing work on task 5 among the group
+  - Creating a new script for this task
 
 
 Task 3 (Anders)
