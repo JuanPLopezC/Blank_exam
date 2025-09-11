@@ -1,6 +1,6 @@
 ---
 title: "final report"
-author: "AndersM"
+author: "AndersM, Juan Pablo López C, Guri Kringeland "
 date: "2025-09-11"
 output: html_document
 ---
