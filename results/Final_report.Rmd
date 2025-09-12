@@ -15,7 +15,6 @@ From the description on package website: “This data set contains data on 316 m
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# 
 
 ```{r cars}
 library(here)
@@ -27,10 +26,12 @@ source(here("scripts", "Script_ggplot_10.09.25.R"))
 You can also embed plots, for example:
 
 ```{r pressure, echo=FALSE}
-source(here("scripts", "Script_ggplot_10.09.25.R"))
+source(here("scripts", "Script_ggplot_10-09-25.R"))
 
 plot1
 ```
+ 
+
 
 ```{r}
 
