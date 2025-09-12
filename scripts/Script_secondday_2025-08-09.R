@@ -6,7 +6,7 @@ library(tidyverse)
 
 ## Reading the tidy version----
 
-tidy_exam_data <- read_delim("data/tidy_exam_data_2025-09-08.txt",
+tidy_exam_data <- read_delim(here("data/tidy_exam_data_2025-09-08.txt"),
   delim = "\t", escape_double = FALSE,
   trim_ws = TRUE
 )
