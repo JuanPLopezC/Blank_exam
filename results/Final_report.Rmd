@@ -36,7 +36,7 @@ The coding was stored by the end of each session, with a script for the same dat
 glimpse(tidy_exam_data_2025-09-09)
 glimpse(tidy_exam_data-2025-09-08)
 glimpse(joint_exam_data_data-2025-09-08)
-Please view Codebook_updated and script for more details. 
+Please view Updated_codebook_2025_11_09 and script for more details. 
 
 ```{r cars}
 library(here)
@@ -87,25 +87,24 @@ source(here("scripts", "Script_ggplot_10-09-25.R"))
 
 plot1
 ```
- 
+#Analysing the data  
+After tidying, exploring, and making plots, we divided "task 5" exercises among the group, which regarded exercises on analyzing the data. 
+Methods: Checked normality of time to recurrence (weeks) (Shapiro–Wilk + histogram) → non-normal → used Kruskal–Wallis for group comparisons. Furthermore, we compared time to recurrence across RBC storage age groups and tumor stage. Then we ran two simple linear models:
+TimeToRecurrence_days_new ~ Adjuvant_radiation_therapy; & TVol ~ Recurrence.
+(Effect sizes and p-values reported in script output tables.)
 
+Results:RBC storage age groups: Kruskal–Wallis χ²(2)=1.022, p=0.60 → no evidence of differences.
+Tumor stage: Kruskal–Wallis χ²(1)=7.962, p=0.0048 → distributions differ by stage.
+Linear models showed: Therapy–time and Recurrence–TVol associations summarized by coefficients; see script tables for estimates and significance. Conclusions:No difference by RBC storage age; clear difference by tumor stage; AdjRadTherapy and time to recurrence showed no significant association; Recurrence and TVol: Yes—patients with recurrence had significantly larger TVol.
 
+We also did a minor change in the dataset trough renaming the sGS column to Surgical_gleason_score for tidying purposes. 
 
-## Analyse the dataset and answer the following questions:    
-_(each person chooses one question)_
-
-  - Was the time to recurrence different for various `RBC.Age.Group` levels?
-  - Was the time to recurrence different for various `T.Stage` levels?
-  - Did having `AdjRadTherapy` affecte time to recurrence?
-  - Did those that had recurrence had also larger `TVol` values than those without recurrence?
-
-
-
-
+See the full analysis script here: [Script_sithday_2025-11-09.R](blank//scripts/Script_sithday_2025-11-09.R)
 
 
 ```{r include=FALSE}
-
+library(here)
+source(here("scripts", "Script_sithday_2025-11-09.R"))
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

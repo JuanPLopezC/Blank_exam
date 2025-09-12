@@ -31,7 +31,7 @@ model1 <- data %>%
   lm(TimeToRecurrence_days_new ~ Adjuvant_radiation_therapy, data = .) %>%
   broom::tidy()
 model1
-
+#Answer:No—there was no significant association between adjuvant radiation therapy and time to recurrence (β = −172 days, p = 0.39) in this unadjusted model.
 
 ## JP----
 # Did those that had recurrence had also larger `TVol` values than those without recurrence?
@@ -40,8 +40,9 @@ model2 <- data %>%
   lm(TVol ~ Recurrence, data = .) %>%
   broom::tidy()
 model2
-
+#Answer: Yes—patients with recurrence had significantly larger TVol than those without (β = +0.545, p = 2.87e−7; unadjusted model).
 library(dplyr)
 
-# Renaming sGS column
+# Renaming sGS column - Anders 
 ggplot_exam_data <- ggplot_exam_data |> rename(Surgical_gleason_score = sGS)
+
