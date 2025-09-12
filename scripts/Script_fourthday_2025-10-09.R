@@ -3,11 +3,12 @@
 library(tidyverse)
 library(dplyr)
 library(tidyr)
+library(here)
 
 ## Anders----
 ### Here i try fix the timetoreccurance error ----
 # This is to make the correct columns in days and weeks and round the values so that it doesn't include decimals
-joint_exam_data <- readr::read_tsv("data/joint_exam_data_2025-09-09.txt") %>%
+joint_exam_data <- readr::read_tsv(here("data/joint_exam_data_2025-09-09.txt")) %>%
   mutate(
     unit_norm = str_to_lower(str_trim(TimeToRecurrence_unit)),
     ttr_num = readr::parse_number(as.character(TimeToRecurrence)),
@@ -93,11 +94,13 @@ joint_exam_data %>%
     sd_pvol = sd(PVol, na.rm = TRUE)
   )
 
+glimpse(joint_exam_data)
+
 ## JP----
 ### Stratifying: Only for persons recruited in `Hospital==1` and `TVol == 2`----
 joint_exam_data %>%
   group_by(Recurrence2) %>%
-  filter(Hospital == 1, TVol == 2) %>%
+  filter(Hosp == Hosp1, TVol == 2) %>%
   summarise(
     min_pvol = min(PVol, na.rm = TRUE),
     max_pvol = max(PVol, na.rm = TRUE),
