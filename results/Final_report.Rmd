@@ -1,8 +1,10 @@
 ---
 title: "final report"
-authors: "Anders Mellbye, Juan Pablo López Cervantes, Guri Kringeland "
+authors: 'Anders Mellbye, Juan Pablo López Cervantes, Guri Kringeland '
 date: "2025-09-11"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ##INTRODUCTION
@@ -15,8 +17,6 @@ From the description on package website: “This data set contains data on 316 m
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-<<<<<<< HEAD
-=======
 ##Tidying the data
 The datasett contained oirginally 672 rows for 316 IDs and 21 variables. 
 
