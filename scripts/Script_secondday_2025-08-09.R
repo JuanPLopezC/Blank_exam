@@ -6,7 +6,7 @@ library(tidyverse)
 
 ## Reading the tidy version----
 
-tidy_exam_data <- read_delim("data/tidy_exam_data_2025-09-08.txt",
+tidy_exam_data <- read_delim(here("data/tidy_exam_data_2025-09-08.txt"),
   delim = "\t", escape_double = FALSE,
   trim_ws = TRUE
 )
@@ -73,7 +73,7 @@ glimpse(tidy_exam_data)
 
 
 ## A numeric column showing multiplication of `AnyAdjTherapy_ (Adjuvant_radiation_therapy) and `PreopTherapy`(Preoperative_therapi) for each person
-# assignment making a new variable Totaltherapy- in the real world the assignment doesn't make sense, since no one recived adjuvant therapy- so the value vil be 0 for everyone.
+# assignment making a new variable Totaltherapy- in the real world the assignment doesn't make sense, since no one recived adjuvant therapy- so the value will be 0 for everyone.
 
 
 tidy_exam_data <- tidy_exam_data %>%
