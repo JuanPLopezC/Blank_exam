@@ -12,7 +12,7 @@ library(here)
 
 ## Reading the ggplot version from 10.09.2025----
 # starting fresh with a new name of datafile and new script for task 4, concerning ggplot.
-ggplot_exam_data <- read_tsv("data/ggplot_exam_data_2025-09-10.txt")
+ggplot_exam_data <- read_tsv(here("data","ggplot_exam_data_2025-09-10.txt"))
 
 ## Anders----
 ### Choosing solely numeric columns and filtrating columns that causes issues (missing N/A, or ID)
@@ -61,7 +61,7 @@ spear <- cor.test(ggplot_exam_data2$PVol, ggplot_exam_data2$TVol, method = "spea
 spear
 
 # Setting up for the plot
-dat <- read_tsv("data/ggplot_exam_data_2025-09-10.txt") %>%
+dat <- read_tsv(here("data","ggplot_exam_data_2025-09-10.txt")) %>%
   select(PVol, TVol) %>%
   filter(is.finite(PVol), is.finite(TVol), PVol > 0) %>% # log10 trenger PVol > 0
   mutate(TVol = factor(TVol))
