@@ -1,5 +1,5 @@
 ---
-title: "final report"
+title: "Final Report - Blank group"
 author: "AndersM, Juan Pablo López C, Guri Kringeland "
 date: "2025-09-11"
 output: html_document
@@ -17,9 +17,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # 
 
-```{r cars}
+```{r message=FALSE, warning=FALSE, echo=FALSE}
 library(here)
-source(here("scripts", "Script_ggplot_10.09.25.R"))
+source(here("scripts", "Script_ggplot_2025-10-09.R"))
+
+plot_1
 ```
 
 ## Including Plots
@@ -27,9 +29,8 @@ source(here("scripts", "Script_ggplot_10.09.25.R"))
 You can also embed plots, for example:
 
 ```{r pressure, echo=FALSE}
-source(here("scripts", "Script_ggplot_10.09.25.R"))
+#source(here("scripts", "Script_ggplot_20225.R"))
 
-plot1
 ```
 
 ```{r}
