@@ -75,8 +75,9 @@ list.files("scripts")
 
 After a fun session looking at how to create and format plots in R, we were able to create some nice figures (according to us) to try to answer the following questions. Here we show part of the script we used to build these figures.
 
-1) Are there any correlated measurements? (hint: `GGally::ggcorr` or search online for correlation matrix in R)
-```
+1)  Are there any correlated measurements? (hint: `GGally::ggcorr` or search online for correlation matrix in R)
+
+```         
 library(readr)
 library(dplyr)
 library(GGally)
@@ -84,12 +85,7 @@ library(tidyverse)
 library(ggcorrplot)
 library(here)
 
-## Reading the ggplot version from 10.09.2025----
-# starting fresh with a new name of datafile and new script for task 4, concerning ggplot.
-ggplot_exam_data <- read_tsv(here("data","ggplot_exam_data_2025-09-10.txt"))
-
-## Anders----
-### Choosing solely numeric columns and filtrating columns that causes issues (missing N/A, or ID)
+## Choosing solely numeric columns and filtrating columns that causes issues (missing N/A, or ID)
 num <- ggplot_exam_data %>%
   select(where(is.numeric)) %>%
   select(-any_of(c("ID", "ttr_num", "TimeToRecurrence_weeks_new"))) %>%
@@ -100,7 +96,7 @@ num <- ggplot_exam_data %>%
 ## Making a correlation matrix
 cm <- cor(num, use = "pairwise.complete.obs", method = "pearson")
 
-## filtrating
+## Filtering
 ok <- (rowSums(!is.finite(cm)) == 0) & (colSums(!is.finite(cm)) == 0)
 cm_ok <- cm[ok, ok, drop = FALSE]
 
@@ -108,7 +104,7 @@ cm_ok <- cm[ok, ok, drop = FALSE]
 labs <- make.unique(abbreviate(colnames(cm_ok), minlength = 12))
 colnames(cm_ok) <- rownames(cm_ok) <- labs
 
-## making the heatmap
+## Making the heatmap
 plot_1 <- ggcorrplot(
   cm_ok,
   type = "lower",
@@ -123,9 +119,7 @@ plot_1 <- ggcorrplot(
   )
 
 plot_1
-
 ```
-
 
 ```{r pressure, echo=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
@@ -133,18 +127,17 @@ source(here("scripts", "Script_ggplot_2025-10-09.R"))
 plot_1
 
 ```
+ANSWER: 
 
-2) Is there a relation between the `PVol` and `TVol` variables?
-    
-3) Does the distribution of `PreopPSA` differ by `T.Stage`?
-    
-4) Does the distribution of `PVol` differ by `sGS`?
-    
-  
-5) Does the distribution of `TVol` differ by `sGS`?
-    
-6) Where there more `T.Stage == 2` in the group with `PreopTherapy == 1` than in the group `PreopTherapy == 0`?
+2)  Is there a relation between the `PVol` and `TVol` variables?
 
+3)  Does the distribution of `PreopPSA` differ by `T.Stage`?
+
+4)  Does the distribution of `PVol` differ by `sGS`?
+
+5)  Does the distribution of `TVol` differ by `sGS`?
+
+6)  Where there more `T.Stage == 2` in the group with `PreopTherapy == 1` than in the group `PreopTherapy == 0`?
 
 ```{r pressure, echo=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
@@ -154,7 +147,7 @@ source(here("scripts", "Script_ggplot_2025-10-09.R"))
 plot_1
 ```
 
-## 5. Analysing the data 
+## 5. Analysing the data
 
 After tidying, exploring, and making plots, we divided "task 5" exercises among the group, which regarded exercises on analyzing the data. Methods: Checked normality of time to recurrence (weeks) (Shapiro–Wilk + histogram) → non-normal → used Kruskal–Wallis for group comparisons. Furthermore, we compared time to recurrence across RBC storage age groups and tumor stage. Then we ran two simple linear models: TimeToRecurrence_days_new \~ Adjuvant_radiation_therapy; & TVol \~ Recurrence. (Effect sizes and p-values reported in script output tables.)
 
