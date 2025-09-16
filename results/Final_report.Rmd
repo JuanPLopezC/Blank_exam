@@ -43,11 +43,8 @@ The coding was stored by the end of each session, with a script for the same dat
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
 library(here)
 
-source(here("scripts", "Script_ggplot_2025-10-09.R"))
-
-plot_1
-
 source(here("scripts", "tidy_exam_data_2025-09-08"))
+
 source(here("scripts", "tidy_exam_data_2025-09-09"))
 source(here("scripts", "joint_exam_data_data-2025-09-09"))
 
@@ -76,19 +73,85 @@ list.files("scripts")
 
 ## 4. Create plots
 
--   Are there any correlated measurements? (hint: `GGally::ggcorr` or search online for correlation matrix in R)
-    -   Is there a relation between the `PVol` and `TVol` variables?
-    -   Does the distribution of `PreopPSA` differ by `T.Stage`?
-    -   Does the distribution of `PVol` differ by `sGS`?
-    -   Does the distribution of `TVol` differ by `sGS`?
-    -   Where there more `T.Stage == 2` in the group with `PreopTherapy == 1` than in the group `PreopTherapy == 0`?
+After a fun session looking at how to create and format plots in R, we were able to create some nice figures (according to us) to try to answer the following questions. Here we show part of the script we used to build these figures.
 
-You can also embed plots, for example:
+1) Are there any correlated measurements? (hint: `GGally::ggcorr` or search online for correlation matrix in R)
+```
+library(readr)
+library(dplyr)
+library(GGally)
+library(tidyverse)
+library(ggcorrplot)
+library(here)
+
+## Reading the ggplot version from 10.09.2025----
+# starting fresh with a new name of datafile and new script for task 4, concerning ggplot.
+ggplot_exam_data <- read_tsv(here("data","ggplot_exam_data_2025-09-10.txt"))
+
+## Anders----
+### Choosing solely numeric columns and filtrating columns that causes issues (missing N/A, or ID)
+num <- ggplot_exam_data %>%
+  select(where(is.numeric)) %>%
+  select(-any_of(c("ID", "ttr_num", "TimeToRecurrence_weeks_new"))) %>%
+  mutate(across(everything(), ~ ifelse(is.finite(.), ., NA_real_))) %>%
+  select(where(~ sum(!is.na(.)) >= 3)) %>%
+  select(where(~ sd(., na.rm = TRUE) > 0))
+
+## Making a correlation matrix
+cm <- cor(num, use = "pairwise.complete.obs", method = "pearson")
+
+## filtrating
+ok <- (rowSums(!is.finite(cm)) == 0) & (colSums(!is.finite(cm)) == 0)
+cm_ok <- cm[ok, ok, drop = FALSE]
+
+## Shorter labels
+labs <- make.unique(abbreviate(colnames(cm_ok), minlength = 12))
+colnames(cm_ok) <- rownames(cm_ok) <- labs
+
+## making the heatmap
+plot_1 <- ggcorrplot(
+  cm_ok,
+  type = "lower",
+  lab = FALSE,
+  outline.col = "white",
+  show.diag = TRUE,
+  hc.order = TRUE
+) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size = 8),
+    axis.text.y = element_text(size = 8)
+  )
+
+plot_1
+
+```
+
 
 ```{r pressure, echo=FALSE}
-source(here("scripts", "Script_ggplot_10-09-25.R"))
+source(here("scripts", "Script_ggplot_2025-10-09.R"))
 
-plot1
+plot_1
+
+```
+
+2) Is there a relation between the `PVol` and `TVol` variables?
+    
+3) Does the distribution of `PreopPSA` differ by `T.Stage`?
+    
+4) Does the distribution of `PVol` differ by `sGS`?
+    
+  
+5) Does the distribution of `TVol` differ by `sGS`?
+    
+6) Where there more `T.Stage == 2` in the group with `PreopTherapy == 1` than in the group `PreopTherapy == 0`?
+
+
+```{r pressure, echo=FALSE}
+source(here("scripts", "Script_ggplot_2025-10-09.R"))
+
+
+
+plot_1
 ```
 
 ## 5. Analysing the data 
