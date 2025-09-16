@@ -40,14 +40,18 @@ Our datasett was then joined by the additional exam_data_joint.txt, by the commo
 
 The coding was stored by the end of each session, with a script for the same date. glimpse(tidy_exam_data_2025-09-09) glimpse(tidy_exam_data-2025-09-08) glimpse(joint_exam_data_data-2025-09-08) Please view Updated_codebook_2025_11_09 and script for more details.
 
+
+
+OBS! I THINK THE PART BELOW NEEDS TO HAVE .txt IN ORDER TO WORK. I THINK WE NEED TO FOLLOW THE SAME LOGIC AS THE PLOT_1 BELOW THAT IS WORKING. I WILL TRY TO FIX THIS LATER TODAY OR TOMORROW TO HELP YOU GUYS.
+
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
+
 library(here)
 
-source(here("scripts", "tidy_exam_data_2025-09-08"))
+source(here("data", "tidy_exam_data_2025-09-08.txt"))
 
-source(here("scripts", "tidy_exam_data_2025-09-09"))
-source(here("scripts", "joint_exam_data_data-2025-09-09"))
-
+source(here("data", "tidy_exam_data_2025-09-09.txt"))
+source(here("data", "joint_exam_data_data-2025-09-09.txt"))
 
 
 
@@ -63,7 +67,7 @@ Explore your data. - Explore and comment on the missing variables. - Stratify yo
 list.files("scripts")
 
 ```{r pressure, echo=FALSE}
-#source(here("scripts", "Script_ggplot_20225.R"))
+
 
 ```
 
@@ -139,13 +143,7 @@ ANSWER:
 
 6)  Where there more `T.Stage == 2` in the group with `PreopTherapy == 1` than in the group `PreopTherapy == 0`?
 
-```{r pressure, echo=FALSE}
-source(here("scripts", "Script_ggplot_2025-10-09.R"))
 
-
-
-plot_1
-```
 
 ## 5. Analysing the data
 
@@ -161,7 +159,7 @@ See the full analysis script here: [Script_sithday_2025-11-09.R](blank//scripts/
 
 ```{r include=FALSE}
 library(here)
-source(here("scripts", "Script_sithday_2025-11-09.R"))
+source(here("scripts", "Script_sixthday_2025-11-09.R"))
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
