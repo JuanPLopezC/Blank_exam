@@ -36,9 +36,7 @@ Then we tidyed the variables, by making new, more intuitive names fore those lac
 
 Further on we made new variables to filter and explore the datasett. For instance PVol_High as categorical varible ( \>/\< 100 ml) The variables unit_norm, ttr_num, TimeToRecurrence_days_new, were all made in the purpose of making the variable TimeToRecurrence_weeks_new, for calculations with the same numeric category (weeks). We met a little rocky road making this new variable, therefor keeping some duplicates to remember the steps of the string.
 
-Our datasett was then joined by the additional exam_data_joint.txt, by the common variable ID. By the end of the tidying session we ended up with 316 IDs( rows) and 27 variables (columns)
-
-The coding was stored by the end of each session, with a script for the same date. glimpse(tidy_exam_data_2025-09-09) glimpse(tidy_exam_data-2025-09-08) glimpse(joint_exam_data_data-2025-09-08) Please view Updated_codebook_2025_11_09 and script for more details.
+The coding was stored by the end of each session, with a script for the same date and a new data set after each session too (we present an overview of the different versions of our data througout the tidying process). 
 
 First tidy version of the data set:
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
@@ -70,8 +68,9 @@ skimr::skim(tidy_exam_data2)
 
 ```
 
+Our datasett was then joined by the additional exam_data_joint.txt, by the common variable ID. By the end of the tidying session we ended up with 316 IDs( rows) and 27 variables (columns).
 
-Final tidy version (after joining it with supplementary data set "exam_data.txt"):
+Overview of the final tidy version (after joining it with the additional data set "exam_data.txt"):
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
 
 library(here)
@@ -91,13 +90,39 @@ Stratify your data by a categorical column and report min, max, mean and sd of a
 list.files("scripts")
 
 
-```{r}
+Finally, we updated the codebook after we renamed and deleted variables in the tidying process. OBS! This is not looking nice, not the html version nor the .txt, I do not know if there is a way of fixing the new codebook so it could look more like the original one?
 
+You can just skip this part, i put this to convert the .txt to html and open it in the .rmd every time, but i think we need to format the codebook first.
+
+
+```{r, include=FALSE}
+library(rmarkdown)
+
+# Paths
+codebook_txt  <- here::here("data", "Codebook_updated_2025_11_09.txt")
+codebook_html <- here::here("data", "Codebook_updated_2025_11_09.html")
+
+# Convert .txt → .html if needed
+if (file.exists(codebook_txt)) {
+  rmarkdown::pandoc_convert(
+    input   = codebook_txt,
+    to      = "html",
+    output  = codebook_html,
+    options = c("--standalone")
+  )
+}
 ```
+
+```{r, results='asis', echo=FALSE}
+htmltools::includeHTML(here::here("data", "Codebook_updated_2025_11_09.html"))
+```
+
+
+
 
 ## 4. Create plots
 
-After a fun session looking at how to create and format plots in R, we were able to create some nice figures (according to us) to try to answer the following questions. Here we show part of the script we used to build these figures.
+After a fun session looking at how to create and format plots in R, we were able to create some nice figures (according to us) to try to answer the following questions. Here we show part of the script we used to build these figures according to each task.
 
 1)  Are there any correlated measurements? (hint: `GGally::ggcorr` or search online for correlation matrix in R)
 
