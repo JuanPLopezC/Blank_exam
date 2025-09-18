@@ -1,5 +1,5 @@
 #Columns renamed:
-  - Subject --> ble splittet til hosiptal og ID 
+  - Subject --> Splittet to Hospital and ID
   - 1_Age --> Age
   - RBC.age.group --> Storage_age_group
   - Median.RBC.Age --> Median_storage_age_group 
