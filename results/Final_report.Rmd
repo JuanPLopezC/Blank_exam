@@ -90,10 +90,6 @@ Stratify your data by a categorical column and report min, max, mean and sd of a
 
 list.files("scripts")
 
-```{r pressure, echo=FALSE}
-
-
-```
 
 ```{r}
 
@@ -149,7 +145,7 @@ plot_1 <- ggcorrplot(
 plot_1
 ```
 
-```{r pressure, echo=FALSE}
+```{r pressure, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
 
 plot_1
@@ -182,8 +178,7 @@ We also did a minor change in the dataset trough renaming the sGS column to Surg
 See the full analysis script here: [Script_sixthday_2025-11-09.R](blank//scripts/Script_sithday_2025-11-09.R)
 
 ```{r include=FALSE}
-library(here)
-source(here("scripts", "Script_sixthday_2025-11-09.R"))
+
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
