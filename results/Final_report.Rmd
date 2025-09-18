@@ -180,6 +180,57 @@ ANSWER:
 
 2)  Is there a relation between the `PVol` and `TVol` variables?
 
+```   
+ggplot_exam_data2 <- ggplot_exam_data %>%
+  select(PVol, TVol) %>%
+  filter(!is.na(PVol), !is.na(TVol))
+
+# Checking for correlation
+spear <- cor.test(ggplot_exam_data2$PVol, ggplot_exam_data2$TVol, method = "spearman")
+
+spear
+
+# Setting up for the plot
+dat <- read_tsv(here("data","ggplot_exam_data_2025-09-10.txt")) %>%
+  select(PVol, TVol) %>%
+  filter(is.finite(PVol), is.finite(TVol), PVol > 0) %>% # log10 trenger PVol > 0
+  mutate(TVol = factor(TVol))
+
+# Creating the boxplot and jitter
+plot_2 <- ggplot(dat, aes(TVol, PVol)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(width = 0.15, alpha = 0.5, size = 1) +
+  scale_y_log10() +
+  labs(
+    title = "PVol by TVol",
+    x = "TVol (category)",
+    y = "PVol (log10 scale)"
+  ) +
+  theme_minimal()
+
+plot_2
+
+# Adding Spearman correlation to the boxplot
+sp <- cor.test(dat$PVol, as.numeric(dat$TVol), method = "spearman")
+plot_2a <- plot_2 + annotate("text",
+  x = Inf, y = Inf,
+  label = sprintf(
+    "Spearman rho = %.2f, p = %.3g",
+    sp$estimate, sp$p.value
+  ),
+  hjust = 1.05, vjust = 1.5, size = 4
+)
+
+plot_2a
+```
+```{r pressure, echo=FALSE, warning=FALSE, message=FALSE}
+source(here("scripts", "Script_ggplot_2025-10-09.R"))
+
+plot_2
+plot_2a
+
+```
+
 3)  Does the distribution of `PreopPSA` differ by `T.Stage`?
 
 4)  Does the distribution of `PVol` differ by `sGS`?
