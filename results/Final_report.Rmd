@@ -251,6 +251,7 @@ summary(ggplot_exam_data$Tumor_stage)
 
 plot_3
 ```
+##### **Figure 3**: Boxplot of the distribution of Preoperative Prostate Specific Antigen (PSA) across Tumor Stages
 
 ```{r pressure3, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
@@ -258,6 +259,8 @@ source(here("scripts", "Script_ggplot_2025-10-09.R"))
 plot_3
 
 ```
+
+ANSWER: The distribution of preoperative PSA (PreopPSA) appears to differ by tumor stage. For instance, patients with stage 1 tumors had lower PSA values, though with several high outliers. Those with stage 2 tumors showed a broader spread and higher median PSA compared to stage 1, indicating more variability and higher levels overall. Overall, this suggests that higher tumor stage is associated with higher and more variable preoperative PSA levels.
 
 4)  Does the distribution of `PVol` differ by `sGS`?
 
