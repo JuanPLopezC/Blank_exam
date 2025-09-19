@@ -94,7 +94,7 @@ list.files("scripts")
 
 Finally, we updated the codebook after we renamed and deleted variables in the tidying process. OBS! This is not looking nice, not the html version nor the .txt, I do not know if there is a way of fixing the new codebook so it could look more like the original one?
 
-You can just skip this part, i put this to convert the .txt to html and open it in the .rmd every time, but i think we need to format the codebook first.
+You can just skip this part, i put this to convert the .txt to html and open it in the .rmd every time, but i think we need to format the codebook first. There is a Rmd version of the codebook now. The chunk below. It looks more like the original codebook, check it out. If not we can try to dispay it another way. 
 
 ```{r, include=FALSE}
 library(rmarkdown)
@@ -116,6 +116,13 @@ if (file.exists(codebook_txt)) {
 
 ```{r, results='asis', echo=FALSE}
 htmltools::includeHTML(here::here("data", "Codebook_updated_2025_11_09.html"))
+```
+
+```{r}
+knitr::opts_current$set(echo = FALSE, results = "asis")
+codebook <- file.path("..","data","Codebook_updated_2025_11_09.Rmd")
+codebook <- normalizePath(codebook, winslash = "/", mustWork = TRUE)
+cat(knitr::knit_child(codebook, quiet = TRUE))
 ```
 
 ## 4. Create plots
