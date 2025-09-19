@@ -112,7 +112,7 @@ plot_3
 plot_4 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = PVol)) +
   geom_boxplot(fill = "lightblue", color = "darkblue") +
   labs(
-    title = "Distribution of Prostate Volume by surgical Gleason score",
+    title = "Distribution of Prostate Volume by Surgical Gleason score",
     x = "Surgical Gleason Score",
     y = "Prostate Volume"
   ) +
@@ -128,7 +128,7 @@ summary(ggplot_exam_data$sGS)
 plot_5 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = TVol)) +
   geom_boxplot(fill = "lightblue", color = "darkblue") +
   labs(
-    title = "Distribution of Tumor Volume by surgical Gleason score",
+    title = "Distribution of Tumor Volume by Surgical Gleason score",
     x = "Surgical Gleason Score",
     y = "Tumor Volume"
   ) +
