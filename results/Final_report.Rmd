@@ -120,7 +120,7 @@ htmltools::includeHTML(here::here("data", "Codebook_updated_2025_11_09.html"))
 
 ## 4. Create plots
 
-After a fun session looking at how to create and format plots in R, we were able to create some nice figures (according to us) to try to answer the following questions. Here we show part of the script we used to build these figures according to each task.
+After a fun session looking at how to create and format plots in R, we were able to create some nice figures (according to us) to try to answer the following questions. Before each figure, we included the script we used to build these plots according to each task (just for informative purposes).
 
 1)  Are there any correlated measurements? (hint: `GGally::ggcorr` or search online for correlation matrix in R)
 
