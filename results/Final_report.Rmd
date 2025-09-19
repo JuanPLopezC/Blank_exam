@@ -1,10 +1,10 @@
 ------------------------------------------------------------------------
 
-Title: "Final Report - Blank group" author: "AndersM, Juan Pablo López C, Guri Kringeland " ======= Title: "Final report" authors: 'Anders Mellbye, Juan Pablo López Cervantes, Guri Kringeland '
+# Final report - Blank group
 
-date: "2025-09-11" output: pdf_document: default html_document: default editor_options: markdown: wrap: 72 ---
+## Authors: Anders Mellbye, Juan Pablo López Cervantes, Guri Kringeland
 
-tinytex::install_tinytex()
+#### Date: "2025-09-11"
 
 # INTRODUCTION
 
@@ -120,7 +120,7 @@ htmltools::includeHTML(here::here("data", "Codebook_updated_2025_11_09.html"))
 
 ## 4. Create plots
 
-After a fun session looking at how to create and format plots in R, we were able to create some nice figures (according to us) to try to answer the following questions. Here we show part of the script we used to build these figures according to each task.
+After a fun session looking at how to create and format plots in R, we were able to create some nice figures (according to us) to try to answer the following questions. Before each figure, we included the script we used to build these plots according to each task (just for informative purposes).
 
 1)  Are there any correlated measurements? (hint: `GGally::ggcorr` or search online for correlation matrix in R)
 
@@ -177,7 +177,7 @@ plot_1
 
 ```
 
-ANSWER: Strong positive correlations are highlighted in red (close to +1), and strong negative correlations in blue (close to –1).In general, we see mildly correlated variables. We could highlight the positive stronger correlation between Recurrences, Time To Recurrence, Preoperative PSA, Tumor stage, TVol, and Preoperative and Adjuvant therapies. In addition, we could also point out to the negative correlation (close to -1.0) with regard to Censor and Time To Recurrence, Preoperative PSA, TVol, Preoperative and Adjuvant therapies.
+ANSWER: Strong positive correlations are highlighted in red (close to +1), and strong negative correlations in blue (close to –1).In general, we see mildly correlated variables. We could highlight the positive stronger correlation between Recurrences, Time To Recurrence, Preoperative PSA, Tumor stage, TVol, and Preoperative and Adjuvant therapies. In addition, we could also point out to the negative correlation (close to -1) with regard to Censor and Time To Recurrence, Preoperative PSA, TVol, Preoperative and Adjuvant therapies.
 
 2)  Is there a relation between the `PVol` and `TVol` variables?
 
@@ -225,13 +225,17 @@ plot_2a <- plot_2 + annotate("text",
 plot_2a
 ```
 
+##### **Figure 2**: Boxplot and Spearman correlation coefficient of the relation between Prostate Volumen (PVol) and Tumor Volume (TVol)
+
 ```{r pressure2, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
 
-plot_2
+
 plot_2a
 
 ```
+
+ANSWER: This figure shows the distribution of prostate volume (PVol, log10 scale) across tumor volume (TVol) categories. Median PVol tends to be higher in men with lower TVol categories, with a gradual decline as TVol increases. The negative correlation is confirmed by a Spearman rank correlation coefficient of –0.21 (p = 0.0003), indicating that larger tumor volume is modestly but significantly associated with smaller prostate volume.
 
 3)  Does the distribution of `PreopPSA` differ by `T.Stage`?
 
@@ -250,6 +254,8 @@ summary(ggplot_exam_data$Tumor_stage)
 plot_3
 ```
 
+##### **Figure 3**: Boxplot of the distribution of Preoperative Prostate Specific Antigen (PSA) across Tumor Stages
+
 ```{r pressure3, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
 
@@ -257,13 +263,15 @@ plot_3
 
 ```
 
+ANSWER: The distribution of preoperative PSA (PreopPSA) appears to differ by tumor stage. For instance, patients with stage 1 tumors had lower PSA values, though with several high outliers. Those with stage 2 tumors showed a broader spread and higher median PSA compared to stage 1, indicating more variability and higher levels overall. Overall, this suggests that higher tumor stage is associated with higher and more variable preoperative PSA levels.
+
 4)  Does the distribution of `PVol` differ by `sGS`?
 
 ```         
 plot_4 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = PVol)) +
   geom_boxplot(fill = "lightblue", color = "darkblue") +
   labs(
-    title = "Distribution of Protate Volume by surgical Gleason score",
+    title = "Distribution of Prostate Volume by Surgical Gleason score",
     x = "Surgical Gleason Score",
     y = "Prostate Volume"
   ) +
@@ -272,6 +280,8 @@ plot_4 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = PVol)) +
 plot_4
 ```
 
+##### **Figure 4**: Boxplot of the distribution of Prostate volume across Surgical Gleason Score
+
 ```{r pressure4, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
 
@@ -279,13 +289,15 @@ plot_4
 
 ```
 
+ANSWER: Yes, we can see that the distribution of prostate volume differs by surgical Gleason score. While the medians don’t shift dramatically, the variability and number of outliers differ substantially. For instance, sGS = 2 has the broadest distribution with more very large prostate volumes, whereas sGS = 1 and 4 are tighter.
+
 5)  Does the distribution of `TVol` differ by `sGS`?
 
 ```         
 plot_5 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = TVol)) +
   geom_boxplot(fill = "lightblue", color = "darkblue") +
   labs(
-    title = "Distribution of Tumor Volume by surgical Gleason score",
+    title = "Distribution of Tumor Volume by Surgical Gleason score",
     x = "Surgical Gleason Score",
     y = "Tumor Volume"
   ) +
@@ -293,6 +305,8 @@ plot_5 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = TVol)) +
 
 plot_5
 ```
+
+##### **Figures 5 and 6**: Distribution of Tumor volume across Surgical Gleason Score
 
 ```{r pressure5, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
@@ -322,6 +336,8 @@ source(here("scripts", "Script_ggplot_2025-10-09.R"))
 plot_5b
 
 ```
+
+ANSWER: We have included two graphs for this task in order to make it more understandable. In Figure 5, we can see that unlike prostate volume (PVol), the distribution of tumor volume (TVol) looks quite similar across sGS categories. There is no clear trend of increasing or decreasing tumor volume with higher Gleason scores. Figure 6 shows a clearer picture of the actual distribution of the patients, highlighting the differences across groups.
 
 6)  Where there more `T.Stage == 2` in the group with `PreopTherapy == 1` than in the group `PreopTherapy == 0`?
 
@@ -355,6 +371,8 @@ plot_6 <- plot_6_2 +
 plot_6
 ```
 
+##### **Figure 7**: Distribution of patients with Tumor Stage 2, by preoperative therapy groups
+
 ```{r pressure7, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
 
@@ -362,13 +380,15 @@ plot_6
 
 ```
 
+ANSWER: There is a clear difference in the amount of patients with Tumor Stage 2 by Preoperative therapy, with more patients in the group that did not receive this therapy before the operation.
+
 ## 5. Analysing the data
 
 After tidying, exploring, and making plots, we divided "task 5" exercises among the group, which regarded exercises on analyzing the data. Methods: Checked normality of time to recurrence (weeks) (Shapiro–Wilk + histogram) → non-normal → used Kruskal–Wallis for group comparisons. Furthermore, we compared time to recurrence across RBC storage age groups and tumor stage. Then we ran two simple linear models: TimeToRecurrence_days_new \~ Adjuvant_radiation_therapy; & TVol \~ Recurrence. (Effect sizes and p-values reported in script output tables.)
 
-Results:RBC storage age groups: Kruskal–Wallis χ²(2)=1.022, p=0.60 → no evidence of differences. Tumor stage: Kruskal–Wallis χ²(1)=7.962, p=0.0048 → distributions differ by stage. Linear models showed: Therapy–time and Recurrence–TVol associations summarized by coefficients; see script tables for estimates and significance.
+RESULTS: RBC storage age groups: Kruskal–Wallis χ²(2)=1.022, p=0.60 → no evidence of differences. Tumor stage: Kruskal–Wallis χ²(1)=7.962, p=0.0048 → distributions differ by stage. Linear models showed: Therapy–time and Recurrence–TVol associations summarized by coefficients; see script tables for estimates and significance.
 
-Conclusions: No difference by RBC storage age; clear difference by tumor stage; AdjRadTherapy and time to recurrence showed no significant association; Recurrence and TVol: Yes—patients with recurrence had significantly larger TVol.
+CONCLUSIONS: No difference by RBC storage age; clear difference by tumor stage; AdjRadTherapy and time to recurrence showed no significant association; Recurrence and TVol: Yes—patients with recurrence had significantly larger TVol.
 
 We also did a minor change in the dataset trough renaming the sGS column to Surgical_gleason_score for tidying purposes.
 
@@ -378,4 +398,3 @@ See the full analysis script here: [Script_sixthday_2025-11-09.R](blank//scripts
 
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
