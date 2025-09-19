@@ -112,7 +112,7 @@ plot_3
 plot_4 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = PVol)) +
   geom_boxplot(fill = "lightblue", color = "darkblue") +
   labs(
-    title = "Distribustion of Protate Volume by surgical Gleason score",
+    title = "Distribution of Prostate Volume by surgical Gleason score",
     x = "Surgical Gleason Score",
     y = "Prostate Volume"
   ) +
