@@ -268,7 +268,7 @@ ANSWER: The distribution of preoperative PSA (PreopPSA) appears to differ by tum
 plot_4 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = PVol)) +
   geom_boxplot(fill = "lightblue", color = "darkblue") +
   labs(
-    title = "Distribution of Protate Volume by surgical Gleason score",
+    title = "Distribution of Prostate Volume by Surgical Gleason score",
     x = "Surgical Gleason Score",
     y = "Prostate Volume"
   ) +
@@ -276,6 +276,7 @@ plot_4 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = PVol)) +
 
 plot_4
 ```
+##### **Figure 4**: Boxplot of the distribution of Prostate volume across Surgical Gleason Score
 
 ```{r pressure4, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
@@ -283,6 +284,8 @@ source(here("scripts", "Script_ggplot_2025-10-09.R"))
 plot_4
 
 ```
+ANSWER: Yes, we can see that the distribution of prostate volume differs by surgical Gleason score. While the medians don’t shift dramatically, the variability and number of outliers differ substantially. For instance, sGS = 2 has the broadest distribution with more very large prostate volumes, whereas sGS = 1 and 4 are tighter.
+
 
 5)  Does the distribution of `TVol` differ by `sGS`?
 
@@ -290,7 +293,7 @@ plot_4
 plot_5 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = TVol)) +
   geom_boxplot(fill = "lightblue", color = "darkblue") +
   labs(
-    title = "Distribution of Tumor Volume by surgical Gleason score",
+    title = "Distribution of Tumor Volume by Surgical Gleason score",
     x = "Surgical Gleason Score",
     y = "Tumor Volume"
   ) +
@@ -298,6 +301,8 @@ plot_5 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = TVol)) +
 
 plot_5
 ```
+##### **Figures 5 and 6**: Distribution of Tumor volume across Surgical Gleason Score
+
 
 ```{r pressure5, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
@@ -305,6 +310,7 @@ source(here("scripts", "Script_ggplot_2025-10-09.R"))
 plot_5
 
 ```
+
 
 ```         
 plot_5b <- ggplot_exam_data %>%
@@ -327,6 +333,8 @@ source(here("scripts", "Script_ggplot_2025-10-09.R"))
 plot_5b
 
 ```
+ANSWER: We have included two graphs for this task in order to make it more understandable. In Figure 5, we can see that unlike prostate volume (PVol), the distribution of tumor volume (TVol) looks quite similar across sGS categories. There is no clear trend of increasing or decreasing tumor volume with higher Gleason scores. Figure 6 shows a clearer picture of the actual distribution of the patients, highlighting the differences across groups.
+
 
 6)  Where there more `T.Stage == 2` in the group with `PreopTherapy == 1` than in the group `PreopTherapy == 0`?
 
