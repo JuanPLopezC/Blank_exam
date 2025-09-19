@@ -8,7 +8,7 @@ tinytex::install_tinytex()
 
 # INTRODUCTION
 
-We were given two databases from the source: Cata et al. ’Blood Storage Duration and Biochemical Recurrence of Cancer after Radical Prostate ctomy’. Mayo Clin Proc 2011; 86(2): 120-127. A clean version is taken from R package medicaldata.
+We were given two databases (main and additional) from the source: Cata et al. ’Blood Storage Duration and Biochemical Recurrence of Cancer after Radical Prostate ctomy’. Mayo Clin Proc 2011; 86(2): 120-127. A clean version is taken from R package medicaldata.
 
 From the description available on the package website: “This data set contains data on 316 men who had undergone radical prostatectomy and received transfusion during or within 30 days of the surgical procedure and had available prostate serum antigen (PSA) follow-up data. The main exposure of interest was RBC storage duration group.”
 
@@ -176,7 +176,7 @@ source(here("scripts", "Script_ggplot_2025-10-09.R"))
 plot_1
 
 ```
-ANSWER: 
+ANSWER: Strong positive correlations are highlighted in red (close to +1), and strong negative correlations in blue (close to –1).In general, we see mildly correlated variables. We could highlight the positive stronger correlation between Recurrences, Time To Recurrence, Preoperative PSA, Tumor stage, TVol, and Preoperative and Adjuvant therapies. In addition, we could also point out to the negative correlation (close to -1.0) with regard to Censor and Time To Recurrence, Preoperative PSA, TVol, Preoperative and Adjuvant therapies.
 
 2)  Is there a relation between the `PVol` and `TVol` variables?
 
