@@ -177,7 +177,7 @@ plot_1
 
 ```
 
-ANSWER: Strong positive correlations are highlighted in red (close to +1), and strong negative correlations in blue (close to –1).In general, we see mildly correlated variables. We could highlight the positive stronger correlation between Recurrences, Time To Recurrence, Preoperative PSA, Tumor stage, TVol, and Preoperative and Adjuvant therapies. In addition, we could also point out to the negative correlation (close to -1.0) with regard to Censor and Time To Recurrence, Preoperative PSA, TVol, Preoperative and Adjuvant therapies.
+ANSWER: Strong positive correlations are highlighted in red (close to +1), and strong negative correlations in blue (close to –1).In general, we see mildly correlated variables. We could highlight the positive stronger correlation between Recurrences, Time To Recurrence, Preoperative PSA, Tumor stage, TVol, and Preoperative and Adjuvant therapies. In addition, we could also point out to the negative correlation (close to -1) with regard to Censor and Time To Recurrence, Preoperative PSA, TVol, Preoperative and Adjuvant therapies.
 
 2)  Is there a relation between the `PVol` and `TVol` variables?
 
@@ -225,13 +225,15 @@ plot_2a <- plot_2 + annotate("text",
 plot_2a
 ```
 
+##### **Figure 2**: Heatmap with correlation matrix
 ```{r pressure2, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
 
-plot_2
+
 plot_2a
 
 ```
+ANSWER: This figure shows the distribution of prostate volume (PVol, log10 scale) across tumor volume (TVol) categories. Median PVol tends to be higher in men with lower TVol categories, with a gradual decline as TVol increases. The negative correlation is confirmed by a Spearman rank correlation coefficient of –0.21 (p = 0.0003), indicating that larger tumor volume is modestly but significantly associated with smaller overall prostate volume.
 
 3)  Does the distribution of `PreopPSA` differ by `T.Stage`?
 
