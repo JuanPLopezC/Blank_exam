@@ -223,7 +223,7 @@ plot_2a <- plot_2 + annotate("text",
 
 plot_2a
 ```
-```{r pressure, echo=FALSE, warning=FALSE, message=FALSE}
+```{r pressure2, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
 
 plot_2
@@ -233,12 +233,129 @@ plot_2a
 
 3)  Does the distribution of `PreopPSA` differ by `T.Stage`?
 
+
+```   
+plot_3 <- ggplot(ggplot_exam_data, aes(x = factor(Tumor_stage), y = Preoperative_PSA)) +
+  geom_boxplot(fill = "lightblue", color = "darkblue") +
+  labs(
+    title = "Distribution of Preoperative PSA by Tumor stage",
+    x = "Tumor stage",
+    y = "Preoperative PSA"
+  ) +
+  theme_minimal()
+summary(ggplot_exam_data$Preoperative_PSA)
+summary(ggplot_exam_data$Tumor_stage)
+
+plot_3
+```
+```{r pressure3, echo=FALSE, warning=FALSE, message=FALSE}
+source(here("scripts", "Script_ggplot_2025-10-09.R"))
+
+plot_3
+
+```
+
 4)  Does the distribution of `PVol` differ by `sGS`?
+
+```   
+plot_4 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = PVol)) +
+  geom_boxplot(fill = "lightblue", color = "darkblue") +
+  labs(
+    title = "Distribution of Protate Volume by surgical Gleason score",
+    x = "Surgical Gleason Score",
+    y = "Prostate Volume"
+  ) +
+  theme_minimal()
+
+plot_4
+```
+```{r pressure4, echo=FALSE, warning=FALSE, message=FALSE}
+source(here("scripts", "Script_ggplot_2025-10-09.R"))
+
+plot_4
+
+```
 
 5)  Does the distribution of `TVol` differ by `sGS`?
 
+```   
+plot_5 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = TVol)) +
+  geom_boxplot(fill = "lightblue", color = "darkblue") +
+  labs(
+    title = "Distribution of Tumor Volume by surgical Gleason score",
+    x = "Surgical Gleason Score",
+    y = "Tumor Volume"
+  ) +
+  theme_minimal()
+
+plot_5
+```
+```{r pressure5, echo=FALSE, warning=FALSE, message=FALSE}
+source(here("scripts", "Script_ggplot_2025-10-09.R"))
+
+plot_5
+
+```
+
+```   
+plot_5b <- ggplot_exam_data %>%
+  ggplot(aes(x = factor(TVol), fill = factor(sGS))) +
+  geom_bar(position = "dodge") +
+  labs(
+    title = "Distribution of Tumor volume by Gleason score",
+    x = "Tumor volume",
+    y = "Number of patients",
+    fill = "sGS (postoperative Gleason score)"
+  ) +
+  theme_minimal()
+
+plot_5b
+```
+```{r pressure6, echo=FALSE, warning=FALSE, message=FALSE}
+source(here("scripts", "Script_ggplot_2025-10-09.R"))
+
+plot_5b
+
+```
+
+
 6)  Where there more `T.Stage == 2` in the group with `PreopTherapy == 1` than in the group `PreopTherapy == 0`?
 
+```   
+plot_6_1 <- ggplot_exam_data %>%
+  mutate(Preoperative_therapy2 = if_else(Preoperative_therapy == "0", "No", "Yes")) %>%
+  filter(Tumor_stage == 2) %>%
+  ggplot(aes(Preoperative_therapy2)) +
+  geom_bar(width = 0.3, fill = "darkblue")
+plot_6_1
+
+plot_6_2 <- plot_6_1 +
+  xlab("Preoperative therapy") +
+  ylab("Number of patients") +
+  labs(
+    title = "Number of patients with tumor stage 2",
+    subtitle = "stratified by preoperative therapy groups"
+  )
+
+plot_6_2
+
+plot_6 <- plot_6_2 +
+  theme(
+    plot.title = element_text(
+      size = 20,
+      face = "bold"
+    )
+  ) +
+  theme_minimal()
+
+plot_6
+```
+```{r pressure7, echo=FALSE, warning=FALSE, message=FALSE}
+source(here("scripts", "Script_ggplot_2025-10-09.R"))
+
+plot_6
+
+```
 
 
 ## 5. Analysing the data
