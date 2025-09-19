@@ -367,6 +367,7 @@ plot_6 <- plot_6_2 +
 
 plot_6
 ```
+##### **Figure 7**: Distribution of patients with Tumor Stage 2, by preoperative therapy groups
 
 ```{r pressure7, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
@@ -374,6 +375,8 @@ source(here("scripts", "Script_ggplot_2025-10-09.R"))
 plot_6
 
 ```
+ANSWER: There is a clear difference in the amount of patients with Tumor Stage 2 by Preoperative therapy, with more patients in the group that did not receive this therapy before the operation.
+
 
 ## 5. Analysing the data
 
