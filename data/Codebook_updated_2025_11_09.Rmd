@@ -1,0 +1,41 @@
+---
+title: "Codebook_updated_2025_11_09"
+author: "AndersM, Juan Pablo Lopez C, Guri Kringeland"
+date: "2025-09-19"
+output: html_document
+---
+
+## Codebook (updated 2025-11-09)
+
+### Columns renamed
+- Subject → Splitted to Hospital and ID
+- 1_Age → Age
+- RBC.age.group → Storage_age_group
+- Median.RBC.Age → Median_storage_age_group
+- FamHx → Family_history
+- T stage → Tumor_stage
+- PreopPSA → Preoperative_PSA
+- PreopTherapy → Preoperative_therapy
+- Units → Allogeneic_units
+- AnyAdjTherapy → Adjuvant_therapy
+- AdjRadTherapy → Adjuvant_radiation_therapy
+- SGS → Surgical_gleason_score
+
+### Columns deleted
+- AA
+
+### New columns
+
+| Variable                     | Position | Description                                                            | Codes / values        |
+|:---------------------------- | -------: | :--------------------------------------------------------------------- | :-------------------- |
+| PVol                         |      17  | Indicator showing PVol measures; type: **numeric**                     | range: 19–274         |
+| TVol                         |      18  | Indicator showing TVol measures; type: **categorical**                 | levels: 1, 2, 3       |
+| PVol_HighLow                 |      19  | Indicator showing PVol over/under 100; type: **categorical**           | "High", "Low"         |
+| Recurrence2                  |      20  | Indicator showing recurrence; type: **categorical**                    | "Yes", "No"           |
+| TotalTherapy                 |      21  | Received preoperative or adjuvant radiation therapy; **categorical**   | 0, 1                  |
+| unit_norm                    |      23  | Helper for PVol_highlow; **categorical**                               | "High", "Low"         |
+| ttr_num                      |      24  | Helper variable; **numeric**                                           | —                     |
+| TimeToRecurrence_days_new    |      25  | Days to recurrence; **numeric**                                        | range: 2–725          |
+| TimeToRecurrence_weeks_new   |      26  | Weeks to recurrence; **numeric**                                       | range: 0–104          |
+
+
