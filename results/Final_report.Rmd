@@ -36,9 +36,10 @@ Then we tidyed the variables, by making new, more intuitive names fore those lac
 
 Further on we made new variables to filter and explore the datasett. For instance PVol_High as categorical varible ( \>/\< 100 ml) The variables unit_norm, ttr_num, TimeToRecurrence_days_new, were all made in the purpose of making the variable TimeToRecurrence_weeks_new, for calculations with the same numeric category (weeks). We met a little rocky road making this new variable, therefor keeping some duplicates to remember the steps of the string.
 
-The coding was stored by the end of each session, with a script for the same date and a new data set after each session too (we present an overview of the different versions of our data througout the tidying process). 
+The coding was stored by the end of each session, with a script for the same date and a new data set after each session too (we present an overview of the different versions of our data througout the tidying process).
 
 First tidy version of the data set:
+
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
 
 library(here)
@@ -57,6 +58,7 @@ skimr::skim(tidy_exam_data)
 We continued tidying our data set...
 
 Second tidy version:
+
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
 
 library(here)
@@ -71,6 +73,7 @@ skimr::skim(tidy_exam_data2)
 Our datasett was then joined by the additional exam_data_joint.txt, by the common variable ID. By the end of the tidying session we ended up with 316 IDs( rows) and 27 variables (columns).
 
 Overview of the final tidy version (after joining it with the additional data set "exam_data.txt"):
+
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
 
 library(here)
@@ -89,11 +92,9 @@ Stratify your data by a categorical column and report min, max, mean and sd of a
 
 list.files("scripts")
 
-
 Finally, we updated the codebook after we renamed and deleted variables in the tidying process. OBS! This is not looking nice, not the html version nor the .txt, I do not know if there is a way of fixing the new codebook so it could look more like the original one?
 
 You can just skip this part, i put this to convert the .txt to html and open it in the .rmd every time, but i think we need to format the codebook first.
-
 
 ```{r, include=FALSE}
 library(rmarkdown)
@@ -116,9 +117,6 @@ if (file.exists(codebook_txt)) {
 ```{r, results='asis', echo=FALSE}
 htmltools::includeHTML(here::here("data", "Codebook_updated_2025_11_09.html"))
 ```
-
-
-
 
 ## 4. Create plots
 
@@ -170,17 +168,20 @@ plot_1 <- ggcorrplot(
 plot_1
 ```
 
+##### **Figure 1**: Heatmap with correlation matrix
+
 ```{r pressure, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
 
 plot_1
 
 ```
+
 ANSWER: Strong positive correlations are highlighted in red (close to +1), and strong negative correlations in blue (close to –1).In general, we see mildly correlated variables. We could highlight the positive stronger correlation between Recurrences, Time To Recurrence, Preoperative PSA, Tumor stage, TVol, and Preoperative and Adjuvant therapies. In addition, we could also point out to the negative correlation (close to -1.0) with regard to Censor and Time To Recurrence, Preoperative PSA, TVol, Preoperative and Adjuvant therapies.
 
 2)  Is there a relation between the `PVol` and `TVol` variables?
 
-```   
+```         
 ggplot_exam_data2 <- ggplot_exam_data %>%
   select(PVol, TVol) %>%
   filter(!is.na(PVol), !is.na(TVol))
@@ -223,6 +224,7 @@ plot_2a <- plot_2 + annotate("text",
 
 plot_2a
 ```
+
 ```{r pressure2, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
 
@@ -233,8 +235,7 @@ plot_2a
 
 3)  Does the distribution of `PreopPSA` differ by `T.Stage`?
 
-
-```   
+```         
 plot_3 <- ggplot(ggplot_exam_data, aes(x = factor(Tumor_stage), y = Preoperative_PSA)) +
   geom_boxplot(fill = "lightblue", color = "darkblue") +
   labs(
@@ -248,6 +249,7 @@ summary(ggplot_exam_data$Tumor_stage)
 
 plot_3
 ```
+
 ```{r pressure3, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
 
@@ -257,7 +259,7 @@ plot_3
 
 4)  Does the distribution of `PVol` differ by `sGS`?
 
-```   
+```         
 plot_4 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = PVol)) +
   geom_boxplot(fill = "lightblue", color = "darkblue") +
   labs(
@@ -269,6 +271,7 @@ plot_4 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = PVol)) +
 
 plot_4
 ```
+
 ```{r pressure4, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
 
@@ -278,7 +281,7 @@ plot_4
 
 5)  Does the distribution of `TVol` differ by `sGS`?
 
-```   
+```         
 plot_5 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = TVol)) +
   geom_boxplot(fill = "lightblue", color = "darkblue") +
   labs(
@@ -290,6 +293,7 @@ plot_5 <- ggplot(ggplot_exam_data, aes(x = factor(sGS), y = TVol)) +
 
 plot_5
 ```
+
 ```{r pressure5, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
 
@@ -297,7 +301,7 @@ plot_5
 
 ```
 
-```   
+```         
 plot_5b <- ggplot_exam_data %>%
   ggplot(aes(x = factor(TVol), fill = factor(sGS))) +
   geom_bar(position = "dodge") +
@@ -311,6 +315,7 @@ plot_5b <- ggplot_exam_data %>%
 
 plot_5b
 ```
+
 ```{r pressure6, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
 
@@ -318,10 +323,9 @@ plot_5b
 
 ```
 
-
 6)  Where there more `T.Stage == 2` in the group with `PreopTherapy == 1` than in the group `PreopTherapy == 0`?
 
-```   
+```         
 plot_6_1 <- ggplot_exam_data %>%
   mutate(Preoperative_therapy2 = if_else(Preoperative_therapy == "0", "No", "Yes")) %>%
   filter(Tumor_stage == 2) %>%
@@ -350,13 +354,13 @@ plot_6 <- plot_6_2 +
 
 plot_6
 ```
+
 ```{r pressure7, echo=FALSE, warning=FALSE, message=FALSE}
 source(here("scripts", "Script_ggplot_2025-10-09.R"))
 
 plot_6
 
 ```
-
 
 ## 5. Analysing the data
 
