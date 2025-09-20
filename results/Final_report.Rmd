@@ -4,9 +4,9 @@
 
 ## Authors: Anders Mellbye, Juan Pablo López Cervantes, Guri Kringeland
 
-#### Date: "2025-09-11"
+#### Date: 2025-09-22
 
-# INTRODUCTION
+## Introduction
 
 We were given two databases (main and additional) from the source: Cata et al. ’Blood Storage Duration and Biochemical Recurrence of Cancer after Radical Prostate ctomy’. Mayo Clin Proc 2011; 86(2): 120-127. A clean version is taken from R package medicaldata.
 
@@ -17,6 +17,8 @@ We had different tasks to develop based on these database and the new skills lea
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+## Tasks
 
 ## 1. Create an RStudio project and GitHub repository
 
@@ -397,4 +399,3 @@ See the full analysis script here: [Script_sixthday_2025-11-09.R](blank//scripts
 ```{r include=FALSE}
 
 ```
-
