@@ -12,7 +12,7 @@ We were given two databases (main and additional) from the source: Cata et al. �
 
 From the description available on the package website: “This data set contains data on 316 men who had undergone radical prostatectomy and received transfusion during or within 30 days of the surgical procedure and had available prostate serum antigen (PSA) follow-up data. The main exposure of interest was RBC storage duration group.”
 
-We had different tasks to develop based on these database and the new skills learned from R. In the following sections, we describe our work to fulfill these tasks. We hope you enjoy it.
+We had different tasks to develop based on these databases and the new skills learned from R. In the following sections, we describe our work to fulfill these tasks. We hope you enjoy it.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -28,7 +28,7 @@ We created our GitHub repository named "Blank exam" to place our documents. Ther
 
 ### First glance
 
-The original data set had 672 rows for 316 IDs and 21 variables..
+The original data set had 672 rows for 316 IDs and 21 variables...DO WE NEED MORE HERE?
 
 ### Initial round of tidying the data
 
@@ -72,7 +72,7 @@ skimr::skim(tidy_exam_data2)
 
 ```
 
-Our datasett was then joined by the additional exam_data_joint.txt, by the common variable ID. By the end of the tidying session we ended up with 316 IDs( rows) and 27 variables (columns).
+Our dataset was then joined by the additional exam_data_joint.txt, by the common variable ID. By the end of the tidying session we ended up with 316 IDs( rows) and 27 variables (columns).
 
 Overview of the final tidy version (after joining it with the additional data set "exam_data.txt"):
 
@@ -87,16 +87,25 @@ skimr::skim(joint_exam_data)
 
 ```
 
-Once we had joint the two data sets we were given, we began exploring in detail our variables, based on the following instructions...
+Once we had joint the two data sets we were given, we began exploring in detail our variables, based on the following instructions:
 
-Stratify your data by a categorical column and report min, max, mean and sd of a numeric column. - Stratify your data by a categorical column and report min, max, mean and sd of a numeric column for a defined set of observations - use a pipe `%>%`!\
-*(each member of the group chooses one column)* - Only for persons with `T.Stage == 1` - Only for persons with `Median.RBC.Age == 25` - Only for persons with `TimeToReccurence` later than 4 weeks - Only for persons recruited in `Hosp1` and `Tvol == 2` - Use two categorical columns in your dataset to create a table (either with `table()`, `count()`, or `janitor::tabyl()`)
+1) Stratify your data by a categorical column and report min, max, mean and sd of a numeric column.
 
-list.files("scripts")
+2) Stratify your data by a categorical column and report min, max, mean and sd of a numeric column for a defined set of observations
+
+ - Only for persons with `T.Stage == 1`
+
+ - Only for persons with `Median.RBC.Age == 25`
+
+ - Only for persons with `TimeToReccurence` later than 4 weeks
+
+ - Only for persons recruited in `Hosp1` and `Tvol == 2`
+
+ - Use two categorical columns in your dataset to create a table (either with `table()`, `count()`, or `janitor::tabyl()`)
 
 Finally, we updated the codebook after we renamed and deleted variables in the tidying process. OBS! This is not looking nice, not the html version nor the .txt, I do not know if there is a way of fixing the new codebook so it could look more like the original one?
 
-You can just skip this part, i put this to convert the .txt to html and open it in the .rmd every time, but i think we need to format the codebook first. There is a Rmd version of the codebook now. The chunk below. It looks more like the original codebook, check it out. If not we can try to dispay it another way. 
+PENDING: You can just skip this part, i put this to convert the .txt to html and open it in the .rmd every time, but i think we need to format the codebook first. There is a Rmd version of the codebook now. The chunk below. It looks more like the original codebook, check it out. If not we can try to dispay it another way. I can see if we could make it the same way that the original codebook we got, if not, we just leave like that... (JP-Lørdag 20.09)
 
 ```{r, include=FALSE}
 library(rmarkdown)
