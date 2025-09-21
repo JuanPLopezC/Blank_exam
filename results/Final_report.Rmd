@@ -219,9 +219,10 @@ joint_exam_data %>%
 glimpse(joint_exam_data)
 ```
 
--   Only for persons recruited in `Hosp1` and `Tvol == 2`
+-   Only for persons recruited in `Hospital 1` and `Tvol == 2`
 
 ```{r,include=FALSE}
+library(tidyverse)
 library(here)
 library(readr)
 
