@@ -34,7 +34,7 @@ The original data set had 672 rows for 316 IDs and 21 variables. We identified s
 
 First we deleted 40 duplicates. Through the pivot wider task ( volumemasurement and .value-\> PVol and TVol). rows were halved, now presenting one row per ID for the 316 study subjects.
 
-Then we tidyed the variables, by making new, more intuitive names fore those lacking of one. Columns containing information concerning two variables were either separated (Subject-\> Hospital and ID ) or splitt through pivot wider as mentioned. Columns listed in the assignmet as not of interest was deleted, as asked for in the task. Columns were then sorted with ID first.
+Then we tidyed the variables, by making new, more intuitive names fore those lacking of one. Columns containing information concerning two variables were either separated (Subject-\> Hospital and ID ) or split through pivot wider as mentioned. Columns listed in the assignmet as not of interest was deleted, as asked for in the task. Columns were then sorted with ID being placed first.
 
 Further on we made new variables to filter and explore the datasett. For instance PVol_High as categorical varible ( \>/\< 100 ml) The variables unit_norm, ttr_num, TimeToRecurrence_days_new, were all made in the purpose of making the variable TimeToRecurrence_weeks_new, for calculations with the same numeric category (weeks). We met a little rocky road making this new variable, therefor keeping some duplicates to remember the steps of the string.
 
@@ -72,7 +72,7 @@ skimr::skim(tidy_exam_data2)
 
 ```
 
-Our dataset was then joined by the additional exam_data_joint.txt, by the common variable ID. By the end of the tidying session we ended up with 316 IDs( rows) and 27 variables (columns).
+Our dataset was then left joined with the additional exam_data_joint.txt, by the common variable ID. By the end of the tidying session we ended up with 316 IDs( rows) and 27 variables (columns).
 
 Overview of the final tidy version (after joining it with the additional data set "exam_data.txt"):
 
