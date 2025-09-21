@@ -104,6 +104,9 @@ Once we had joint the two data sets we were given, we began exploring in detail 
 1)  Stratify your data by a categorical column and report min, max, mean and sd of a numeric column.
 
 ```{r include= false}
+
+install.packages("skimr")
+library(skimr)
 library(here)
 library(readr)
 
