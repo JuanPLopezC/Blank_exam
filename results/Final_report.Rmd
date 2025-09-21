@@ -5,18 +5,39 @@
 ## Authors: Anders Mellbye, Juan Pablo López Cervantes, Guri Kringeland
 
 #### Date: 2025-09-22
+#### Output: html_document
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, 
+  warning = FALSE, 
+  message = FALSE
+)
+
+```
+
+```{r}
+#Nødvendige pakker
+
+library(tidyverse)
+library(readr)
+library(here)
+library(skimr)
+library(forcats)
+library(GGally)
+```
+
 
 ## Introduction
-
 We were given two databases (main and additional) from the source: Cata et al. ’Blood Storage Duration and Biochemical Recurrence of Cancer after Radical Prostate ctomy’. Mayo Clin Proc 2011; 86(2): 120-127. A clean version is taken from R package medicaldata.
 
 From the description available on the package website: “This data set contains data on 316 men who had undergone radical prostatectomy and received transfusion during or within 30 days of the surgical procedure and had available prostate serum antigen (PSA) follow-up data. The main exposure of interest was RBC storage duration group.”
 
 We had different tasks to develop based on these databases and the new skills learned from R. In the following sections, we describe our work to fulfill these tasks. We hope you'll enjoy it.
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+---
+
 
 ## Tasks
 
@@ -42,9 +63,6 @@ First tidy version of the data set:
 
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
 
-library(here)
-library(readr)
-
 tidy_exam_data <- read_delim(here("data", "tidy_exam_data_2025-09-08.txt"),
                              delim = "\t")
 skimr::skim(tidy_exam_data)
@@ -55,91 +73,54 @@ skimr::skim(tidy_exam_data)
 
 ### More tidying of the data
 
-We continued tidying our data set. Further on we made new variables to filter and explore the datasett. For instance PVol_High as categorical varible ( \>/\< 100 ml) The variables unit_norm, ttr_num, TimeToRecurrence_days_new, were all made in the purpose of making the variable TimeToRecurrence_weeks_new, for calculations with the same numeric category (weeks). We met a little rocky road making this new variable, therefor keeping some duplicates to remember the steps of the string.
+We continued tidying our data set. Further on we made new variables to filter and explore the datasett. For instance PVol_High as categorical varible ( \>/\< 100 ml) 
+The variables unit_norm, ttr_num,
+
+Our dataset was left joined with the additional exam_data_joint.txt, by the common variable ID. By the end of the tidying session we ended up with 316 IDs( rows) and 27 variables (columns).
+
+
+Afterwards, when looking over va our variables, we needed to redo som of the steps
+-TimeToRecurrence_days_new, were made in the purpose of making the variable TimeToRecurrence_weeks_new, for calculations with the same numeric category (weeks). We met a little rocky road making this new variable, therefor keeping some duplicates to remember the steps of the string.
+-we wanted tidy the variable Hosp, deleting characteters and keeping the numer (1-3) of the treating hospital.
 
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
 
-library(tidyverse)
-library(here)
-library(readr)
-joint_exam_data <- readr::read_tsv(here("data/joint_exam_data_2025-09-09.txt")) %>%
+joint_exam_data <- read_tsv(here("data", "joint_exam_data_2025-09-09.txt")) %>%
+  # New variabler
   mutate(
     unit_norm = str_to_lower(str_trim(TimeToRecurrence_unit)),
-    ttr_num = readr::parse_number(as.character(TimeToRecurrence)),
+    ttr_num = parse_number(as.character(TimeToRecurrence)),
     TimeToRecurrence_days_new = case_when(
       str_starts(unit_norm, "week") ~ ttr_num * 7,
       str_starts(unit_norm, "day") ~ ttr_num,
       TRUE ~ NA_real_
     ),
-    TimeToRecurrence_weeks_new = TimeToRecurrence_days_new / 7
-  ) %>%
-  mutate(
-    TimeToRecurrence_days_new  = as.integer(round(TimeToRecurrence_days_new, 0)),
-    TimeToRecurrence_weeks_new = as.integer(round(TimeToRecurrence_weeks_new, 0))
+    TimeToRecurrence_weeks_new = as.integer(round(TimeToRecurrence_days_new / 7, 0)),
+    TimeToRecurrence_days_new = as.integer(round(TimeToRecurrence_days_new, 0)),
+    Hospital = gsub("Hosp", "", Hosp)
   )
+
+# quick overview
 glimpse(joint_exam_data)
 ```
 
-Second tidy version:
 
-```{r message=FALSE, warning=FALSE, echo=FALSE}
 
-library(here)
-library(readr)
-
-tidy_exam_data2 <- read_delim(here("data", "tidy_exam_data_2025-09-09.txt"),
-                             delim = "\t")
-skimr::skim(tidy_exam_data2)
-
-```
-
-Our dataset was then left joined with the additional exam_data_joint.txt, by the common variable ID. By the end of the tidying session we ended up with 316 IDs( rows) and 27 variables (columns).
-
-Overview of the final tidy version (after joining it with the additional data set "exam_data.txt"):
+Overview of the final tidy version and joining with the additional data set "exam_data.txt"):
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 
-library(here)
-library(readr)
-
-joint_exam_data <- read_delim(here("data", "joint_exam_data_2025-09-09.txt"),
-                             delim = "\t")
-skimr::skim(joint_exam_data)
-
+skim(joint_exam_data)
 ```
-
-Once we looked over the variables we then realized that we wanted tidy the variable Hosp, deleting characteters and keeping the numer (1-3) of the treathing hospital.
-
-```{r}
-
-joint_exam_data <- read_delim(here("data", "joint_exam_data_2025-09-09.txt"),
-                             delim = "\t")
-joint_exam_data <- joint_exam_data %>% mutate(Hosp = gsub("Hosp", "", Hosp)) %>% rename("Hospital" = "Hosp")
-
-glimpse(joint_exam_data)
-
-
-
-```
-
-Once we had joint the two data sets we were given, we began exploring in detail our variables, based on the following instructions:
+Further more, we began exploring our variables in daitail, based on the following instructions:
 
 1)  Stratify your data by a categorical column and report min, max, mean and sd of a numeric column.
 
-```{r include= false}
+```{r include=false}
 
-install.packages("skimr")
-library(skimr)
-library(here)
-library(readr)
-
-joint_exam_data <- read_delim(here("data", "joint_exam_data_2025-09-09.txt"),
-                             delim = "\t")
 
 joint_exam_data %>%
-  group_by(
-    Tumor_stage_lab = if_else(is.na(Tumor_stage),"Missing", as.character(Tumor_stage))
-  ) %>%
+  group_by(Tumor_stage_lab = if_else(is.na(Tumor_stage), "Missing", as.character(Tumor_stage))) %>%
   summarise(
     n = n(),
     min = min(Preoperative_PSA, na.rm = TRUE),
@@ -156,12 +137,8 @@ glimpse(joint_exam_data)
 
 -   Only for persons with `T.Stage == 1`
 
-```{r include= false}
-library(here)
-library(readr)
+```{r include=false}
 
-joint_exam_data <- read_delim(here("data", "joint_exam_data_2025-09-09.txt"),
-                             delim = "\t")
 joint_exam_data %>%
   group_by(Recurrence2) %>%
   filter(Tumor_stage == 1) %>%
@@ -176,13 +153,7 @@ joint_exam_data %>%
 
 -   Only for persons with `Median.RBC.Age == 25`
 
-```{r, include=FALSE}
-library(tidyverse)
-library(here)
-library(readr)
-
-joint_exam_data <- read_delim(here("data", "joint_exam_data_2025-09-09.txt"),
-                             delim = "\t")
+```{r, include=false}
 
 joint_exam_data %>%
   group_by(Recurrence2) %>%
@@ -197,18 +168,30 @@ joint_exam_data %>%
 
 ```
 
+
 -   Only for persons with `TimeToReccurence` later than 4 weeks
 
-```{r, include=FALSE}
-library(tidyverse)
-library(here)
-library(readr)
+```{r, include=false}
 
-joint_exam_data <- read_delim(here("data", "joint_exam_data_2025-09-09.txt"),
-                             delim = "\t")
 joint_exam_data %>%
-  group_by(Recurrence2) %>%
   filter(TimeToRecurrence_weeks_new > 4) %>%
+  group_by(Recurrence2) %>%
+  summarise(
+    min_pvol = min(PVol, na.rm = TRUE),
+    max_pvol = max(PVol, na.rm = TRUE),
+    mean_pvol = mean(PVol, na.rm = TRUE),
+    sd_pvol = sd(PVol, na.rm = TRUE)
+  )
+glimpse(joint_exam_data)
+```
+
+-   Only for persons recruited in `Hospital 1` and `Tvol == 2`
+
+```{r,include=false}
+
+joint_exam_data %>%
+  filter(Hospital == "1", TVol == 2) %>%
+  group_by(Recurrence2) %>%
   summarise(
     min_pvol = min(PVol, na.rm = TRUE),
     max_pvol = max(PVol, na.rm = TRUE),
@@ -217,58 +200,34 @@ joint_exam_data %>%
   )
 
 glimpse(joint_exam_data)
-```
-
--   Only for persons recruited in `Hospital 1` and `Tvol == 2`
-
-```{r,include=FALSE}
-library(tidyverse)
-library(here)
-library(readr)
-
-joint_exam_data <- read_delim(here("data", "joint_exam_data_2025-09-09.txt"),
-                             delim = "\t")
-
-joint_exam_data %>%
-  group_by(Recurrence2) %>%
-  filter(Hospital == 1, TVol == 2) %>%
-  summarise(
-    min_pvol = min(PVol, na.rm = TRUE),
-    max_pvol = max(PVol, na.rm = TRUE),
-    mean_pvol = mean(PVol, na.rm = TRUE),
-    sd_pvol = sd(PVol, na.rm = TRUE)
-  )
 
 ```
+
 
 -   Use two categorical columns in your dataset to create a table (either with `table()`, `count()`, or `janitor::tabyl()`)
 
 ```{r, echo = FALSE}
-#library(dplyr), 
-#library(tidyr),
-library(forcats)
-tab <- joint_exam_data %>%
+joint_exam_data %>%
   mutate(
     Tumor_stage = fct_explicit_na(as.factor(Tumor_stage), na_level = "Missing"),
     Hospital = as.factor(Hospital)
   ) %>%
   count(Tumor_stage, Hospital, name = "n", .drop = FALSE) %>%
   pivot_wider(names_from = Hospital, values_from = n, values_fill = 0)
-
-tab
 ```
+
 
 After the latest tidying we and the stratifying work, we saved the data sett with the new name ggplot_exam_data, as getting ready for task 4 concerning ggplot.
 
 ```{r,echo = FALSE}
 
-fileName <- paste0("data/ggplot_exam_data_", Sys.Date(), ".txt")
+
+fileName <- here("data", paste0("ggplot_exam_data_", Sys.Date(), ".txt"))
 write_delim(
   joint_exam_data,
   file = fileName,
   delim = "\t"
 )
-
 ```
 
 Finally, we updated the codebook.
