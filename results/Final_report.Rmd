@@ -410,7 +410,7 @@ CONCLUSIONS: No difference by RBC storage age; clear difference by tumor stage; 
 
 We also did a minor change in the dataset trough renaming the sGS column to Surgical_gleason_score for tidying purposes.
 
-See the full analysis script here: [Script_sixthday_2025-11-09.R](blank//scripts/Script_sithday_2025-11-09.R)
+See the full analysis script here: [Script_sixthday_2025-11-09.R](blank//scripts/Script_sixthday_2025-11-09.R)
 
 ```{r include=FALSE}
 
