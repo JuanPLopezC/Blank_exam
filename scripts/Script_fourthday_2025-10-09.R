@@ -100,7 +100,7 @@ glimpse(joint_exam_data)
 ### Stratifying: Only for persons recruited in `Hospital==1` and `TVol == 2`----
 joint_exam_data %>%
   group_by(Recurrence2) %>%
-  filter(Hosp == Hosp1, TVol == 2) %>%
+  filter(Hospital == 1, TVol == 2) %>%
   summarise(
     min_pvol = min(PVol, na.rm = TRUE),
     max_pvol = max(PVol, na.rm = TRUE),
