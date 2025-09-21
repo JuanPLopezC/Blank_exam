@@ -8,8 +8,7 @@ Folders inside this project:
 MIT licence
 
 Questions:
--Tasks for the exam
---exam.descr.md
+--exam.descr.md - This contains the tasks we were given for the exam
 
 
 Data:
@@ -30,15 +29,16 @@ Data:
 
 Scripts:
 --Script_firstday_2025-09-05.R
---Script_secondday_2025-09-08.R
+--Script_secondday_2025-08-09.R
 --Script_thirdday_2025-09-09.R
---Script_forthday_2025-09-10.R
---Script_ggplot_2025-09-10.R
---Script_25-09-10.R
+--Script_fourthday_2025-10-09.R
+--Script_ggplot_2025-10-09.R
+--Script_sixthday_25-11-09.R
 
 
 Results: 
 --Final_report.Rmd
+--Final_report.html
 
 
 
