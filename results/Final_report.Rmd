@@ -28,7 +28,7 @@ We created our GitHub repository named "Blank exam" to place our documents. Ther
 
 ### First glance
 
-The original data set had 672 rows for 316 IDs and 21 variables...DO WE NEED MORE HERE?
+The original data set had 672 rows for 316 IDs and 21 variables. We identified several changes we needed to make on the data set so it could be readable and understandable. For example, we identified duplicated observations (40), some variable names that started either with numbers, spaces or signs: 1_Age. With spaces: T stage, volume measurement, and some variable names that were not so informative. 
 
 ### Initial round of tidying the data
 
