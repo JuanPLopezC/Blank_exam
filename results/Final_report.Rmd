@@ -103,34 +103,11 @@ Once we had joint the two data sets we were given, we began exploring in detail 
 
  - Use two categorical columns in your dataset to create a table (either with `table()`, `count()`, or `janitor::tabyl()`)
 
-Finally, we updated the codebook after we renamed and deleted variables in the tidying process. OBS! This is not looking nice, not the html version nor the .txt, I do not know if there is a way of fixing the new codebook so it could look more like the original one?
+Finally, we updated the codebook after we renamed and deleted variables in the tidying process.
 
-PENDING: You can just skip this part, i put this to convert the .txt to html and open it in the .rmd every time, but i think we need to format the codebook first. There is a Rmd version of the codebook now. The chunk below. It looks more like the original codebook, check it out. If not we can try to dispay it another way. I can see if we could make it the same way that the original codebook we got, if not, we just leave like that... (JP-Lørdag 20.09)
 
-```{r, include=FALSE}
-library(rmarkdown)
-
-# Paths
-codebook_txt  <- here::here("data", "Codebook_updated_2025_11_09.txt")
-codebook_html <- here::here("data", "Codebook_updated_2025_11_09.html")
-
-# Convert .txt → .html if needed
-if (file.exists(codebook_txt)) {
-  rmarkdown::pandoc_convert(
-    input   = codebook_txt,
-    to      = "html",
-    output  = codebook_html,
-    options = c("--standalone")
-  )
-}
-```
-
-```{r, results='asis', echo=FALSE}
-htmltools::includeHTML(here::here("data", "Codebook_updated_2025_11_09.html"))
-```
-
-```{r}
-knitr::opts_current$set(echo = FALSE, results = "asis")
+```{r, echo = FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message= FALSE, results = "asis")
 codebook <- file.path("..","data","Codebook_updated_2025_11_09.Rmd")
 codebook <- normalizePath(codebook, winslash = "/", mustWork = TRUE)
 cat(knitr::knit_child(codebook, quiet = TRUE))
