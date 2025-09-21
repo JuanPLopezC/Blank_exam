@@ -12,7 +12,7 @@ We were given two databases (main and additional) from the source: Cata et al. �
 
 From the description available on the package website: “This data set contains data on 316 men who had undergone radical prostatectomy and received transfusion during or within 30 days of the surgical procedure and had available prostate serum antigen (PSA) follow-up data. The main exposure of interest was RBC storage duration group.”
 
-We had different tasks to develop based on these databases and the new skills learned from R. In the following sections, we describe our work to fulfill these tasks. We hope you enjoy it.
+We had different tasks to develop based on these databases and the new skills learned from R. In the following sections, we describe our work to fulfill these tasks. We hope you'll enjoy it.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -28,15 +28,13 @@ We created our GitHub repository named "Blank exam" to place our documents. Ther
 
 ### First glance
 
-The original data set had 672 rows for 316 IDs and 21 variables. We identified several changes we needed to make on the data set so it could be readable and understandable. For example, we identified duplicated observations (40), some variable names that started either with numbers, spaces or signs: 1_Age. With spaces: T stage, volume measurement, and some variable names that were not so informative. 
+The original data set had 672 rows for 316 IDs and 21 variables. We identified several changes we needed to make on the data set so it could be readable and understandable. For example, we identified duplicated observations (40), some variable names that started either with numbers, spaces or signs: 1_Age. With spaces: T stage, volume measurement, and some variable names that were not so informative.
 
 ### Initial round of tidying the data
 
 First we deleted 40 duplicates. Through the pivot wider task ( volumemasurement and .value-\> PVol and TVol). rows were halved, now presenting one row per ID for the 316 study subjects.
 
 Then we tidyed the variables, by making new, more intuitive names fore those lacking of one. Columns containing information concerning two variables were either separated (Subject-\> Hospital and ID ) or split through pivot wider as mentioned. Columns listed in the assignmet as not of interest was deleted, as asked for in the task. Columns were then sorted with ID being placed first.
-
-Further on we made new variables to filter and explore the datasett. For instance PVol_High as categorical varible ( \>/\< 100 ml) The variables unit_norm, ttr_num, TimeToRecurrence_days_new, were all made in the purpose of making the variable TimeToRecurrence_weeks_new, for calculations with the same numeric category (weeks). We met a little rocky road making this new variable, therefor keeping some duplicates to remember the steps of the string.
 
 The coding was stored by the end of each session, with a script for the same date and a new data set after each session too (we present an overview of the different versions of our data througout the tidying process).
 
@@ -57,7 +55,7 @@ skimr::skim(tidy_exam_data)
 
 ### More tidying of the data
 
-We continued tidying our data set...
+We continued tidying our data set. Further on we made new variables to filter and explore the datasett. For instance PVol_High as categorical varible ( \>/\< 100 ml) The variables unit_norm, ttr_num, TimeToRecurrence_days_new, were all made in the purpose of making the variable TimeToRecurrence_weeks_new, for calculations with the same numeric category (weeks). We met a little rocky road making this new variable, therefor keeping some duplicates to remember the steps of the string.
 
 Second tidy version:
 
@@ -76,7 +74,7 @@ Our dataset was then left joined with the additional exam_data_joint.txt, by the
 
 Overview of the final tidy version (after joining it with the additional data set "exam_data.txt"):
 
-```{r message=FALSE, warning=FALSE, echo=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 
 library(here)
 library(readr)
@@ -87,24 +85,164 @@ skimr::skim(joint_exam_data)
 
 ```
 
+Once we looked over the variables we then realized that we wanted tidy the variable Hosp, deleting characteters and keeping the numer (1-3) of the treathing hospital.
+
+```{r}
+
+joint_exam_data <- read_delim(here("data", "joint_exam_data_2025-09-09.txt"),
+                             delim = "\t")
+joint_exam_data <- joint_exam_data %>% mutate(Hosp = gsub("Hosp", "", Hosp)) %>% rename("Hospital" = "Hosp")
+
+glimpse(joint_exam_data)
+
+
+
+```
+
 Once we had joint the two data sets we were given, we began exploring in detail our variables, based on the following instructions:
 
-1) Stratify your data by a categorical column and report min, max, mean and sd of a numeric column.
+1)  Stratify your data by a categorical column and report min, max, mean and sd of a numeric column.
 
-2) Stratify your data by a categorical column and report min, max, mean and sd of a numeric column for a defined set of observations
+```{r include= false}
+library(here)
+library(readr)
 
- - Only for persons with `T.Stage == 1`
+joint_exam_data <- read_delim(here("data", "joint_exam_data_2025-09-09.txt"),
+                             delim = "\t")
 
- - Only for persons with `Median.RBC.Age == 25`
+joint_exam_data %>%
+  group_by(
+    Tumor_stage_lab = if_else(is.na(Tumor_stage),"Missing", as.character(Tumor_stage))
+  ) %>%
+  summarise(
+    n = n(),
+    min = min(Preoperative_PSA, na.rm = TRUE),
+    max = max(Preoperative_PSA, na.rm = TRUE),
+    mean = mean(Preoperative_PSA, na.rm = TRUE),
+    sd = sd(Preoperative_PSA, na.rm = TRUE),
+    .groups = "drop"
+  )
 
- - Only for persons with `TimeToReccurence` later than 4 weeks
 
- - Only for persons recruited in `Hosp1` and `Tvol == 2`
+```
 
- - Use two categorical columns in your dataset to create a table (either with `table()`, `count()`, or `janitor::tabyl()`)
+1)  Stratify your data by a categorical column and report min, max, mean and sd of a numeric column for a defined set of observations
 
-Finally, we updated the codebook after we renamed and deleted variables in the tidying process.
+-   Only for persons with `T.Stage == 1`
 
+```{r include= false}
+library(here)
+library(readr)
+
+joint_exam_data <- read_delim(here("data", "joint_exam_data_2025-09-09.txt"),
+                             delim = "\t")
+joint_exam_data %>%
+  group_by(Recurrence2) %>%
+  filter(Tumor_stage == 1) %>%
+  summarise(
+    min_pvol = min(PVol, na.rm = TRUE),
+    max_pvol = max(PVol, na.rm = TRUE),
+    mean_pvol = mean(PVol, na.rm = TRUE),
+    sd_pvol = sd(PVol, na.rm = TRUE)
+  )
+
+```
+
+-   Only for persons with `Median.RBC.Age == 25`
+
+```{r, include=FALSE}
+library(here)
+library(readr)
+
+joint_exam_data <- read_delim(here("data", "joint_exam_data_2025-09-09.txt"),
+                             delim = "\t")
+
+joint_exam_data %>%
+  group_by(Recurrence2) %>%
+  filter(Median_storage_age_group == 25) %>%
+  summarise(
+    min_pvol = min(PVol, na.rm = TRUE),
+    max_pvol = max(PVol, na.rm = TRUE),
+    mean_pvol = mean(PVol, na.rm = TRUE),
+    sd_pvol = sd(PVol, na.rm = TRUE)
+  )
+
+
+```
+
+-   Only for persons with `TimeToReccurence` later than 4 weeks
+
+```{r, include=FALSE}
+library(here)
+library(readr)
+
+joint_exam_data <- read_delim(here("data", "joint_exam_data_2025-09-09.txt"),
+                             delim = "\t")
+joint_exam_data %>%
+  group_by(Recurrence2) %>%
+  filter(TimeToRecurrence_weeks_new > 4) %>%
+  summarise(
+    min_pvol = min(PVol, na.rm = TRUE),
+    max_pvol = max(PVol, na.rm = TRUE),
+    mean_pvol = mean(PVol, na.rm = TRUE),
+    sd_pvol = sd(PVol, na.rm = TRUE)
+  )
+
+glimpse(joint_exam_data)
+```
+
+-   Only for persons recruited in `Hosp1` and `Tvol == 2`
+
+```{r,include=FALSE}
+library(here)
+library(readr)
+
+joint_exam_data <- read_delim(here("data", "joint_exam_data_2025-09-09.txt"),
+                             delim = "\t")
+
+joint_exam_data %>%
+  group_by(Recurrence2) %>%
+  filter(Hosp == Hosp1, TVol == 2) %>%
+  summarise(
+    min_pvol = min(PVol, na.rm = TRUE),
+    max_pvol = max(PVol, na.rm = TRUE),
+    mean_pvol = mean(PVol, na.rm = TRUE),
+    sd_pvol = sd(PVol, na.rm = TRUE)
+  )
+
+```
+
+-   Use two categorical columns in your dataset to create a table (either with `table()`, `count()`, or `janitor::tabyl()`)
+
+```{r, echo = FALSE}
+#library(dplyr), 
+#library(tidyr),
+library(forcats)
+tab <- joint_exam_data %>%
+  mutate(
+    Tumor_stage = fct_explicit_na(as.factor(Tumor_stage), na_level = "Missing"),
+    Hospital = as.factor(Hospital)
+  ) %>%
+  count(Tumor_stage, Hospital, name = "n", .drop = FALSE) %>%
+  pivot_wider(names_from = Hospital, values_from = n, values_fill = 0)
+
+tab
+```
+
+After the latest tidying we and the stratifying work, we saved the data sett with the new name ggplot_exam_data, as getting ready for task 4 concerning ggplot.
+
+```{r,echo = FALSE}
+
+fileName <- paste0("data/ggplot_exam_data_", Sys.Date(), ".txt")
+write_delim(
+  joint_exam_data,
+  file = fileName,
+  delim = "\t"
+)
+
+```
+
+Finally, we updated the codebook.
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message= FALSE, results = "asis")
@@ -115,7 +253,7 @@ cat(knitr::knit_child(codebook, quiet = TRUE))
 
 ## 4. Create plots
 
-After a fun session looking at how to create and format plots in R, we were able to create some nice figures (according to us) to try to answer the following questions. Before each figure, we included the script we used to build these plots according to each task (just for informative purposes).
+After a fun session on looking at how to create and format plots in R, we were able to create some nice figures (according to us) to try to answer the following questions. Before each figure, we included the script we used to build these plots according to each task (just for informative purposes).
 
 1)  Are there any correlated measurements? (hint: `GGally::ggcorr` or search online for correlation matrix in R)
 
