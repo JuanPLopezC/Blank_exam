@@ -81,13 +81,24 @@ The variables unit_norm, ttr_num??? ??
 Our dataset was left joined with the additional exam_data_joint.txt, by the common variable ID. By the end of the tidying session we ended up with 316 IDs( rows) and 27 variables (columns).
 
 Afterwards, when looking over our variables, we needed to redo some of the steps:
-
-   -TimeToRecurrence_days_new, were made in the purpose of making the variable TimeToRecurrence_weeks_new, for calculations with the same numeric category (weeks). We met a little rocky road making this new variable, therefor keeping some duplicates to remember the steps of the string.
    
    -We wanted to tidy the variable Hosp, deleting characters and keeping the number (1-3) of the treating hospital.
 
 ```
+data_clean <- exam_data %>%
+  separate(
+    col = subject,
+    into = c("Hosp", "ID"),
+    sep = "-"
+  )
+data_clean
 
+```
+
+  -TimeToRecurrence_days_new, were made in the purpose of making the variable TimeToRecurrence_weeks_new, for calculations with the same numeric category (weeks). We met a little rocky road making this new variable, therefor keeping some duplicates to remember the steps of the string.
+
+
+```
 joint_exam_data <- read_tsv(here("data", "joint_exam_data_2025-09-09.txt")) %>%
   # New variabler
   mutate(
@@ -103,8 +114,14 @@ joint_exam_data <- read_tsv(here("data", "joint_exam_data_2025-09-09.txt")) %>%
     Hospital = gsub("Hosp", "", Hosp)
   )
 
+
+### This is to delete the old column - timetoreccurance_days ----
+joint_exam_data <- joint_exam_data %>%
+  select(-any_of(c("TimeToRecurrence_days", "timetoreccurance_days")))
+
 # quick overview
 glimpse(joint_exam_data)
+
 ```
 
 Overview of the final tidy version and joining with the additional data set "exam_data.txt"):
