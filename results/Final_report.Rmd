@@ -38,11 +38,10 @@ We created our GitHub repository named "Blank exam" to place our documents. Ther
 
 ### First glance
 
-We continued our journey learning about the most useful packages in the R world. We must admit these were first our worst enemies but ended up being friends and allies in this trip. Here an overview.
+We continued our journey learning about the most useful packages in the R world. We must admit these were first our worst enemies but ended up being friends and allies in this trip. Here an overview of those packages used throughout the course/project.
 
 
-```
-Useful packages
+```{r message=FALSE, warning=FALSE,}
 
 library(tidyverse)
 library(readr)
@@ -52,7 +51,7 @@ library(forcats)
 library(GGally)
 ```
 
-nce we were able to understand a bit more about these packages, we started looking at our data. The original data set had 672 rows for 316 IDs and 21 variables. We identified several changes we needed to make on the data set so it could be readable and understandable. For example, we identified duplicated observations (40), some variable names that started either with numbers, spaces or signs: 1_Age. With spaces: T stage, volume measurement, and some variable names that were not so informative.
+Once we were able to understand a bit more about these packages, we started looking at our data. The original data set had 672 rows for 316 IDs and 21 variables. We identified several changes we needed to make on the data set so it could be readable and understandable. For example, we identified duplicated observations (40), some variable names that started either with numbers, spaces or signs: 1_Age. With spaces: T stage, volume measurement, and some variable names that were not so informative.
 
 ### Initial round of tidying the data
 
@@ -60,7 +59,7 @@ First we deleted 40 duplicates. Through the pivot wider task ( volumemasurement 
 
 Then we tidyed the variables, by making new, more intuitive names fore those lacking of one. Columns containing information concerning two variables were either separated (Subject-\> Hospital and ID ) or split through pivot wider as mentioned. Columns listed in the assignmet as not of interest was deleted, as asked for in the task. Columns were then sorted with ID being placed first.
 
-The coding was stored by the end of each session, with a script for the same date and a new data set after each session too (we present an overview of the different versions of our data througout the tidying process).
+The coding was stored by the end of each session, with a script for the same date and a new data set after each session too (we present an overview of the different versions of our data throughout the tidying process).
 
 First tidy version of the data set:
 
@@ -77,13 +76,14 @@ skimr::skim(tidy_exam_data)
 ### More tidying of the data
 
 Further on we made new variables to filter and explore the dataset. For instance PVol_High as categorical variable ( \>/\< 100 ml) 
-The variables unit_norm, ttr_num
+The variables unit_norm, ttr_num??? ??
 
 Our dataset was left joined with the additional exam_data_joint.txt, by the common variable ID. By the end of the tidying session we ended up with 316 IDs( rows) and 27 variables (columns).
 
-Afterwards, when looking over our variables, we needed to redo som of the steps:
+Afterwards, when looking over our variables, we needed to redo some of the steps:
 
    -TimeToRecurrence_days_new, were made in the purpose of making the variable TimeToRecurrence_weeks_new, for calculations with the same numeric category (weeks). We met a little rocky road making this new variable, therefor keeping some duplicates to remember the steps of the string.
+   
    -We wanted to tidy the variable Hosp, deleting characters and keeping the number (1-3) of the treating hospital.
 
 ```
@@ -248,12 +248,10 @@ After a fun session on looking at how to create and format plots in R, we were a
 1)  Are there any correlated measurements? (hint: `GGally::ggcorr` or search online for correlation matrix in R)
 
 ```         
-library(readr)
 library(dplyr)
 library(GGally)
 library(tidyverse)
 library(ggcorrplot)
-library(here)
 
 ## Choosing solely numeric columns and filtrating columns that causes issues (missing N/A, or ID)
 num <- ggplot_exam_data %>%
