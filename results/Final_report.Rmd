@@ -544,6 +544,7 @@ See the full analysis script here: [Script_sixthday_2025-11-09.R](blank//scripts
 
 After tidying several times, joining, more tyiding, stratifying data, showing several overviews of our different data sets, creating plots and analyzing the results, we have finally come to the end of our work report. We must admit this course and the work felt like a roller coaster, with fun and very productive days when all the commands, libraries and tables came through, and with days when when not even RStudio would open. We tried to do our best on this report and have fun while working on it. We hope is clear and complete enough for you to approve it. Thank you for reading it.
 
+
 THE BLANK TEAM (that is not so blank anymore after this course).
 
 ```{r, echo=FALSE, fig.align='center', out.width="30%"}
