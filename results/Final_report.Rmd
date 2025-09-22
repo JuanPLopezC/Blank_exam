@@ -76,15 +76,15 @@ skimr::skim(tidy_exam_data)
 
 ### More tidying of the data
 
-We continued tidying our data set. Further on we made new variables to filter and explore the dataset. For instance PVol_High as categorical variable ( \>/\< 100 ml) 
-The variables unit_norm, ttr_num,
+Further on we made new variables to filter and explore the dataset. For instance PVol_High as categorical variable ( \>/\< 100 ml) 
+The variables unit_norm, ttr_num
 
 Our dataset was left joined with the additional exam_data_joint.txt, by the common variable ID. By the end of the tidying session we ended up with 316 IDs( rows) and 27 variables (columns).
 
+Afterwards, when looking over our variables, we needed to redo som of the steps:
 
-Afterwards, when looking over our variables, we needed to redo som of the steps
--TimeToRecurrence_days_new, were made in the purpose of making the variable TimeToRecurrence_weeks_new, for calculations with the same numeric category (weeks). We met a little rocky road making this new variable, therefor keeping some duplicates to remember the steps of the string.
--we wanted tidy the variable Hosp, deleting characteters and keeping the number (1-3) of the treating hospital.
+   -TimeToRecurrence_days_new, were made in the purpose of making the variable TimeToRecurrence_weeks_new, for calculations with the same numeric category (weeks). We met a little rocky road making this new variable, therefor keeping some duplicates to remember the steps of the string.
+   -We wanted to tidy the variable Hosp, deleting characters and keeping the number (1-3) of the treating hospital.
 
 ```
 
@@ -107,7 +107,6 @@ joint_exam_data <- read_tsv(here("data", "joint_exam_data_2025-09-09.txt")) %>%
 glimpse(joint_exam_data)
 ```
 
-
 Overview of the final tidy version and joining with the additional data set "exam_data.txt"):
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -117,7 +116,7 @@ joint_exam_data <- read_delim(here("data", "joint_exam_data_2025-09-09.txt"),
 skimr::skim(joint_exam_data)
 ```
 
-Furthermore, we began exploring our variables in detail, based on the following instructions:
+Furthermore, we began exploring our variables in detail, based on the following instructions (we include the commands we used for each task):
 
 1)  Stratify your data by a categorical column and report min, max, mean and sd of a numeric column.
 
@@ -137,7 +136,7 @@ joint_exam_data %>%
 glimpse(joint_exam_data)
 ```
 
-1)  Stratify your data by a categorical column and report min, max, mean and sd of a numeric column for a defined set of observations
+2)  Stratify your data by a categorical column and report min, max, mean and sd of a numeric column for a defined set of observations
 
 -   Only for persons with `T.Stage == 1`
 
@@ -233,7 +232,7 @@ write_delim(
 )
 ```
 
-Finally, we updated the codebook.
+Finally, we created a supplementary codebook based on the variables we created, changed and renamed.
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message= FALSE, results = "asis")
