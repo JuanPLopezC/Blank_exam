@@ -232,6 +232,13 @@ write_delim(
 )
 ```
 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+ggplot_exam_data <- read_delim(here("data", "ggplot_exam_data_2025-09-10.txt"),
+                             delim = "\t")
+skimr::skim(ggplot_exam_data)
+```
+
 Finally, we created a supplementary codebook based on the variables we created, changed and renamed.
 
 ```{r, echo = FALSE}
@@ -511,7 +518,7 @@ RESULTS: RBC storage age groups: Kruskal–Wallis χ²(2)=1.022, p=0.60 → no e
 
 CONCLUSIONS: No difference by RBC storage age; clear difference by tumor stage; AdjRadTherapy and time to recurrence showed no significant association; Recurrence and TVol: Yes—patients with recurrence had significantly larger TVol.
 
-We also did a minor change in the dataset trough renaming the sGS column to Surgical_gleason_score for tidying purposes.
+We also did a minor change in the dataset through renaming the sGS column to Surgical_gleason_score for tidying purposes.
 
 See the full analysis script here: [Script_sixthday_2025-11-09.R](blank//scripts/Script_sixthday_2025-11-09.R)
 
