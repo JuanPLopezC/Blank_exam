@@ -1,6 +1,6 @@
 # Blank_exam
 Title: Exam for RMED 2025 - Group Blank
-Group members: Juan Pablo Lopez Cervantes, Anders Mellby og Guri Kringeland
+Group members: Juan Pablo Lopez Cervantes, Anders Mellbye og Guri Kringeland
 
 
 Folders inside this project:
