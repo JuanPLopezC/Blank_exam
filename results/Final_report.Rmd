@@ -549,7 +549,7 @@ THE BLANK TEAM (that is not so blank anymore after this course).
 
 ```{r, echo=FALSE, fig.align='center', out.width="30%"}
 knitr::include_graphics(
-  here("other files", c("Anders.jpg", "JP.jpg"))
+  here("other files", c("Anders.jpg", "JP.jpg", "Guri.JPG"))
 )
 ```
 
